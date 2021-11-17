@@ -30,7 +30,7 @@ class Usuario {
     
 }
 
-class CuentaBanco implements SaldoUsuario {
+class CuentaBanco implements SaldoCuenta {
     private movimientos: String[];
     private saldo: number;
     private usuario: Usuario;
@@ -76,11 +76,10 @@ class CuentaBanco implements SaldoUsuario {
             m++;
             console.log(`${m}. ${movimiento}`);
         });
-        console.log("--------------------------------");
     }
 }
 
-interface SaldoUsuario {
+interface SaldoCuenta {
     consultarSaldo();
     cargarSaldo(saldo: number);
 }
@@ -100,8 +99,17 @@ console.log("------------------------------------------");
 console.log(" ");
 
 cbu1.transferencia(125, cbu2);
+
+console.log(" ");
+console.log("------------------------------------------");
+console.log(" ");
+
 cbu1.consultarSaldo();
 cbu2.consultarSaldo();
+
+console.log(" ");
+console.log("------------------------------------------");
+console.log(" ");
 
 cbu1.verMovimientos();
 cbu2.verMovimientos();
