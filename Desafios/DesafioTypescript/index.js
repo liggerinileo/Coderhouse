@@ -4,9 +4,10 @@ var Usuario = /** @class */ (function () {
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
-        this.saldo = 0;
-        this.movimientos = [];
     }
+    Usuario.prototype.getDatos = function () {
+        return "Nombre: " + this.getNombre() + " - Apellido: " + this.getApellido + " - DNI: " + this.getDni;
+    };
     Usuario.prototype.getNombre = function () {
         return this.nombre;
     };
@@ -16,48 +17,61 @@ var Usuario = /** @class */ (function () {
     Usuario.prototype.getDni = function () {
         return this.dni;
     };
-    Usuario.prototype.transferirDinero = function (importe, usuario) {
+    return Usuario;
+}());
+var CuentaBanco = /** @class */ (function () {
+    function CuentaBanco(usuario) {
+        this.movimientos = [];
+        this.saldo = 0;
+        this.usuario = usuario;
+    }
+    CuentaBanco.prototype.getCliente = function () {
+        return this.usuario;
+    };
+    CuentaBanco.prototype.consultarSaldo = function () {
+        console.log("Saldo " + this.getCliente().getNombre() + " " + this.getCliente().getApellido() + ": $" + this.saldo);
+    };
+    CuentaBanco.prototype.cargarSaldo = function (importe) {
+        this.saldo += importe;
+    };
+    CuentaBanco.prototype.transferencia = function (importe, cuentaUsuarioReceptor) {
         this.saldo -= importe;
-        this.recibirDinero(importe, usuario);
-        console.log("El usuario " + this.getNombre() + " " + this.getApellido() + " le transfirio $" + importe + " al usuario " + usuario.getNombre() + " " + usuario.getApellido());
+        this.recibirTransferencia(importe, cuentaUsuarioReceptor);
+        console.log("El usuario " + this.usuario.getNombre() + " " + this.usuario.getApellido() + " le transfirio $" + importe + " al usuario " + cuentaUsuarioReceptor.getCliente().getNombre() + " " + cuentaUsuarioReceptor.getCliente().getApellido());
         console.log("Tu saldo restante es $" + this.saldo);
         this.agregarMovimiento("Salida: $" + importe);
     };
-    Usuario.prototype.agregarMovimiento = function (movimiento) {
+    CuentaBanco.prototype.recibirTransferencia = function (importe, cuentaUsuarioReceptor) {
+        cuentaUsuarioReceptor.cargarSaldo(importe);
+        cuentaUsuarioReceptor.agregarMovimiento("Entrada: $" + importe);
+    };
+    CuentaBanco.prototype.agregarMovimiento = function (movimiento) {
         this.movimientos.push(movimiento);
     };
-    Usuario.prototype.recibirDinero = function (importe, usuario) {
-        usuario.cargarSaldo(importe);
-        usuario.agregarMovimiento("Entrada: $" + importe);
-    };
-    Usuario.prototype.verMovimientos = function () {
+    CuentaBanco.prototype.verMovimientos = function () {
         var m = 0;
-        console.log("Movimientos de " + this.getNombre() + " " + this.getApellido());
+        console.log("Movimientos de " + this.usuario.getNombre() + " " + this.usuario.getApellido());
         this.movimientos.forEach(function (movimiento) {
             m++;
             console.log(m + ". " + movimiento);
         });
         console.log("--------------------------------");
     };
-    Usuario.prototype.consultarSaldo = function () {
-        console.log(this.saldo);
-    };
-    Usuario.prototype.cargarSaldo = function (importe) {
-        this.saldo += importe;
-    };
-    return Usuario;
+    return CuentaBanco;
 }());
 var u1 = new Usuario("Leandro", "Liggerini", 11111111);
 var u2 = new Usuario("Juan", "Perez", 22222222);
-u1.cargarSaldo(1000);
-u2.cargarSaldo(500);
-u1.consultarSaldo();
-u2.consultarSaldo();
+var cbu1 = new CuentaBanco(u1);
+var cbu2 = new CuentaBanco(u2);
+cbu1.cargarSaldo(1000);
+cbu2.cargarSaldo(500);
+cbu1.consultarSaldo();
+cbu2.consultarSaldo();
 console.log(" ");
 console.log("------------------------------------------");
 console.log(" ");
-u1.transferirDinero(125, u2);
-u1.consultarSaldo();
-u2.consultarSaldo();
-u1.verMovimientos();
-u2.verMovimientos();
+cbu1.transferencia(125, cbu2);
+cbu1.consultarSaldo();
+cbu2.consultarSaldo();
+cbu1.verMovimientos();
+cbu2.verMovimientos();
