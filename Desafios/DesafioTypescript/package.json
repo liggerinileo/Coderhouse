@@ -1,0 +1,15 @@
+{
+  "name": "coderhouse",
+  "version": "1.0.0",
+  "description": "Desafio Typescript",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [
+    "typescript",
+    "node"
+  ],
+  "author": "Leandro Liggerini",
+  "license": "MIT"
+}
