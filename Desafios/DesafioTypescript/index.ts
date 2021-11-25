@@ -1,5 +1,5 @@
 /*--------CAJERO AUTOMATICO-----------*/
-
+//Sacar console.logs de los metodos
 class Usuario {
     private nombre: String;
     private apellido: String;
@@ -55,7 +55,9 @@ class CuentaBanco implements SaldoCuenta {
     transferencia(importe: number, cuentaUsuarioReceptor: CuentaBanco) {
         this.saldo -= importe;
         this.recibirTransferencia(importe, cuentaUsuarioReceptor);
-        console.log(`El usuario ${this.usuario.getNombre()} ${this.usuario.getApellido()} le transfirio $${importe} al usuario ${cuentaUsuarioReceptor.getCliente().getNombre()} ${cuentaUsuarioReceptor.getCliente().getApellido()}`);
+        console.log(`El usuario ${this.usuario.getNombre()} ${this.usuario.getApellido()} 
+            le transfirio $${importe} al usuario ${cuentaUsuarioReceptor.getCliente().getNombre()} 
+            ${cuentaUsuarioReceptor.getCliente().getApellido()}`);
         console.log(`Tu saldo restante es $${this.saldo}`);
         this.agregarMovimiento(`Salida: $${importe}`);
     }

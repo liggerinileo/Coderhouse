@@ -1,0 +1,28 @@
+<div *ngIf="this.tabla" style="display: flex; justify-content: center; margin-top: 10px;">
+  <button (click)="ocultarTabla()">
+    Ocultar Tabla
+  </button>
+</div>
+<div *ngIf="!this.tabla" style="display: flex; justify-content: center; margin-top: 10px;">
+  <button (click)="mostrarTabla()">
+    Mostrar Tabla
+  </button>
+</div>
+
+<div *ngIf="this.tabla" class="mt-5 mb-5">
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">Handle</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">2</th>
+          </tr>
+        </tbody>
+      </table>
+</div>
