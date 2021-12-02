@@ -1,0 +1,49 @@
+<div style="display: flex; justify-content: center; margin-top: 55px;">
+    <div *ngIf="this.showForm" class="col-10 card">
+        <form class="mt-4" [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+            <div class="mb-5 text-center">
+                <h1>Register</h1>
+            </div>
+            <div class="form-group mb-3 mt-2">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" class="form-control" id="email" formControlName="email" 
+                [(ngModel)]="email" name="email">
+            </div>
+            <div class="form-group mb-3">
+                <label for="nombreUsuario" class="form-label">Usuario</label>
+                <input type="text" class="form-control" id="nombreUsuario" formControlName="nombreUsuario" 
+                  [(ngModel)]="nombreUsuario" name="nombreUsuario">
+            </div>
+            <div class="form-group mb-3">
+              <label for="pass1" class="form-label">Password</label>
+              <input type="password" class="form-control" id="pass" formControlName="pass" 
+                [(ngModel)]="pass" name="pass">
+            </div>
+            <div class="form-group mb-3">
+                <label for="pass2" class="form-label">Repetir Password</label>
+                <input type="password" class="form-control" id="pass2" formControlName="pass2" 
+                  [(ngModel)]="pass2" name="pass2">
+              </div>
+            <div class="form-group text-center mt-5">
+                <button type="submit" class="btn btn-success" [disabled]="!signupForm.valid" 
+                    style="width: 100%; color: white;">
+                  Submit
+                </button>
+            </div>
+        </form>
+    </div>
+    <div *ngIf="!this.showForm" class="col-10 card">
+      <div class="mt-4 text-center">
+        <h4>Email: {{this.email}}</h4>
+      </div>
+      <div class="mt-2 text-center">
+        <h4>Usuario: {{this.nombreUsuario}}</h4>
+      </div>
+      <div class="mt-2 text-center">
+        <h4>Password: {{this.pass}}</h4>
+      </div>
+      <div class="mt-2 text-center">
+        <button type="button" class="btn btn-primary" (click)="backToForm()">Volver</button>
+      </div>
+    </div>
+  </div>
