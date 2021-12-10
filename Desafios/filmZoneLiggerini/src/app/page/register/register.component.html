@@ -1,0 +1,54 @@
+<div style="display: flex; justify-content: center; height: 100vh; align-items: center;">
+    <div class="card">
+        <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+            <div style="display: flex; justify-content: center; text-align: left; margin-bottom: 30px;">
+                <div class="crearCuenta">
+                    <h1>Crear cuenta</h1>
+                </div>
+            </div>
+
+            <div class="nombreApellido">
+                <mat-form-field appearance="outline">
+                    <mat-label>Nombre completo</mat-label>
+                    <input matInput formControlName="nombreCompleto">
+                </mat-form-field>
+              
+                <mat-form-field appearance="outline">
+                    <mat-label>Nombre de usuario</mat-label>
+                    <input matInput formControlName="nombreUsuario">
+                </mat-form-field>
+            </div>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Enter your email</mat-label>
+                <input matInput placeholder="pat@example.com" formControlName="email" required>
+                <mat-error *ngIf="this.email_valido.errors?.email">Email inv&aacute;lido</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Contraseña</mat-label>
+                <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" (change)="checkPassword()">
+                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" 
+                    [attr.aria-pressed]="hide" class="btn-visible">
+                  <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Confirmar contraseña</mat-label>
+                <input matInput [type]="hide ? 'password' : 'text'" formControlName="confirmarPassword" (change)="onConfirmPassword()">
+                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" 
+                    [attr.aria-pressed]="hide" class="btn-visible">
+                  <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+                <mat-error *ngIf="confirm_password.hasError('mismatch')">Las contraseñas no coinciden</mat-error>
+            </mat-form-field>
+
+            <div style="margin-top: 40px;">
+                <button mat-raised-button color="primary" [disabled]="!signupForm.valid">
+                    Registrarse
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

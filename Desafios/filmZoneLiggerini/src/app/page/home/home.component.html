@@ -1,0 +1,22 @@
+<div>
+    <div class="imagen-header">
+        <a [routerLink]="['/home']">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/4/4c/The_Film_Zone_logo.PNG" alt="">
+        </a>
+        <a mat-fab color="basic" class="carrito">
+            <mat-icon>shopping_cart</mat-icon>
+        </a>
+    </div>
+    <div class="lista">
+        <div class="titulo-lista">
+            <h2>Continuar viendo</h2>
+        </div>
+        <div class="listado">
+            <app-card-movie [url]="this.movie?.url" [title]="this.movie?.title"></app-card-movie>
+            <app-card-movie [url]="this.movie2?.url" [title]="this.movie2?.title"></app-card-movie>
+            <app-card-movie [url]="this.movie3?.url" [title]="this.movie3?.title"></app-card-movie>
+            <app-card-movie [url]="this.movie4?.url" [title]="this.movie4?.title"></app-card-movie>
+            <app-card-movie [url]="this.movie5?.url" [title]="this.movie5?.title"></app-card-movie>
+        </div>
+    </div>
+</div>

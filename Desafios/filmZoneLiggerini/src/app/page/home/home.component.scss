@@ -1,0 +1,38 @@
+.imagen-header {
+    top: 0%;
+    background-image:
+    linear-gradient(to bottom, rgba(255, 255, 255, 0) 70%, rgba(41, 10, 61, 1) 100%),
+    url('./../../../assets/header.jpg');
+    height: 600px;
+    width: 100%;
+    background-size: cover;
+}
+
+.imagen-header img {
+    width: 150px;
+    padding-top: 15px;
+    padding-left: 15px;
+}
+
+.listado {
+    display: flex;
+    height: 300px;
+    width: 100%;
+   
+}
+
+.titulo-lista {
+    color: white;
+    margin-left: 15px;
+}
+
+.lista {
+    background: rgb(137,82,189);
+    background: linear-gradient(360deg, rgba(137,82,189,1) 0%, rgba(41,10,61,1) 100%);
+}
+
+.carrito {
+    float: right;
+    margin-right: 50px;
+    margin-top: 25px;
+}
