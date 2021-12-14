@@ -26,7 +26,7 @@ export class HomeComponent implements OnInit {
       title: 'Joker',
     };
     this.movie2 = {
-      url: 'https://movieposterhd.com/wp-content/uploads/2019/03/Game-of-Thrones-Wallpaper-HD.jpg',
+      url: './../../../assets/got.jpg',
       title: 'Game of thrones',
     };
     this.movie3 = {

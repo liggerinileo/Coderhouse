@@ -1,0 +1,21 @@
+<app-card-movie style="display: none;" (newMovie)="agregarList($event)"></app-card-movie>
+<div>
+    <div class="imagen-header">
+        <a [routerLink]="['/home']">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/4/4c/The_Film_Zone_logo.PNG" alt="">
+        </a>
+    </div>
+    <div class="lista">
+        <div class="titulo-lista">
+            <h1>Lista de compras</h1>
+        </div>
+        <div class="listado">
+            <mat-list role="list">
+                <mat-list-item role="listitem" *ngFor="let movie of this.list">
+                    {{movie}}
+                    <mat-divider></mat-divider>
+                </mat-list-item>
+            </mat-list>
+        </div>
+    </div>
+</div>

@@ -1,11 +1,11 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
-  selector: 'app-card-movie',
-  templateUrl: './card-movie.component.html',
-  styleUrls: ['./card-movie.component.scss']
+  selector: 'app-card-movie-big',
+  templateUrl: './card-movie-big.component.html',
+  styleUrls: ['./card-movie-big.component.scss']
 })
-export class CardMovieComponent {
+export class CardMovieBigComponent implements OnInit {
 
   @Input() url: string | undefined;
   @Input() title: string | undefined;
@@ -16,6 +16,8 @@ export class CardMovieComponent {
 
   constructor() { }
 
+  ngOnInit(): void {
+  }
 
   agregarPeli() {
     let movie = {
@@ -25,4 +27,5 @@ export class CardMovieComponent {
     this.newMovie.emit(movie);
     
   }
+
 }

@@ -7,6 +7,8 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatButtonModule } from "@angular/material/button";
 import { MatCardModule } from "@angular/material/card";
 import { MatGridListModule } from "@angular/material/grid-list";
+import { MatMenuModule } from "@angular/material/menu";
+import { MatListModule } from "@angular/material/list";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,7 +17,8 @@ import { LoginComponent } from './page/login/login.component';
 import { RegisterComponent } from './page/register/register.component';
 import { HomeComponent } from './page/home/home.component';
 import { CardMovieComponent } from './component/card-movie/card-movie.component';
-import { CartComponent } from './component/cart/cart.component';
+import { CartPageComponent } from './page/cart-page/cart-page.component';
+import { CardMovieBigComponent } from './component/card-movie-big/card-movie-big.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +27,8 @@ import { CartComponent } from './component/cart/cart.component';
     RegisterComponent,
     HomeComponent,
     CardMovieComponent,
-    CartComponent
+    CartPageComponent,
+    CardMovieBigComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +40,9 @@ import { CartComponent } from './component/cart/cart.component';
     MatIconModule,
     MatButtonModule,
     MatCardModule,
-    MatGridListModule
+    MatGridListModule,
+    MatMenuModule,
+    MatListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

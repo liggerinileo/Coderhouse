@@ -1,0 +1,24 @@
+.imagen-header img {
+    width: 150px;
+    padding-top: 15px;
+    padding-left: 15px;
+}
+
+.titulo-lista h1 {
+    text-align: center;
+    color: white;
+    font-size: 35px;
+    font-weight: 500;
+}
+
+.listado {
+    text-align: -webkit-center;
+}
+
+mat-list {
+    width: 70vw;
+}
+
+mat-list-item {
+    height: 100px !important;
+}

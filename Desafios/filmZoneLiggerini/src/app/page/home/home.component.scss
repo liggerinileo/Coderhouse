@@ -14,11 +14,17 @@
     padding-left: 15px;
 }
 
-.listado {
+.listado, .listado2 {
     display: flex;
-    height: 300px;
     width: 100%;
-   
+}
+
+.listado {
+    height: 250px;
+}
+
+.listado2 {
+    height: 470px;
 }
 
 .titulo-lista {
@@ -35,4 +41,14 @@
     float: right;
     margin-right: 50px;
     margin-top: 25px;
+}
+
+.carrito:hover {
+    background-color: rgb(167, 83, 57);
+}
+
+.carrito-lista {
+    max-width: 400px;
+    margin-bottom: 8px;
+    display: none;
 }
