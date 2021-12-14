@@ -1,4 +1,6 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { CartService } from "../../service/cart.service";
+import { Card } from "./card";
 
 @Component({
   selector: 'app-card-movie',
@@ -7,22 +9,30 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 })
 export class CardMovieComponent {
 
-  @Input() url: string | undefined;
-  @Input() title: string | undefined;
-  @Input() description: string | undefined;
-  @Input() duration: number | undefined;
+  @Input() url: string = '';
+  @Input() title: string = '';
+  @Input() description: string = '';
+  @Input() duration: string = '';
 
-  @Output() newMovie: any = new EventEmitter<any>();
+  movie: Card = {
+    url: '',
+    title: '',
+    description: '',
+    duration: ''
+  };
+  
 
-  constructor() { }
+  constructor(private cartService: CartService) {}
 
 
-  agregarPeli() {
-    let movie = {
+  addToCart(movie: Card): void { 
+    movie = {
       url: this.url,
-      title: this.title
+      title: this.title,
+      description: this.description,
+      duration: this.duration
     }
-    this.newMovie.emit(movie);
-    
+    this.cartService.addToCart(movie);
   }
+
 }

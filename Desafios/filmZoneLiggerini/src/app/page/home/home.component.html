@@ -13,27 +13,46 @@
                 <h2>Continuar viendo</h2>
             </div>
             <div class="listado">
-                <app-card-movie [url]="this.movie?.url" [title]="this.movie?.title"></app-card-movie>
-                <app-card-movie [url]="this.movie2?.url" [title]="this.movie2?.title"></app-card-movie>
-                <app-card-movie [url]="this.movie3?.url" [title]="this.movie3?.title"></app-card-movie>
-                <app-card-movie [url]="this.movie4?.url" [title]="this.movie4?.title"></app-card-movie>
-                <app-card-movie [url]="this.movie5?.url" [title]="this.movie5?.title"></app-card-movie>
+                <app-card-movie [url]="this.movie.url" [title]="this.movie.title"
+                    [description]="this.movie.description" [duration]="this.movie.duration">
+                </app-card-movie>
+                <app-card-movie [url]="this.movie2.url" [title]="this.movie2.title"
+                    [description]="this.movie2.description" [duration]="this.movie2.duration">
+                </app-card-movie>
+                <app-card-movie [url]="this.movie3.url" [title]="this.movie3.title"
+                    [description]="this.movie3.description" [duration]="this.movie3.duration">
+                </app-card-movie>
+                <app-card-movie [url]="this.movie4.url" [title]="this.movie4.title"
+                    [description]="this.movie4.description" [duration]="this.movie4.duration">
+                </app-card-movie>
+                <app-card-movie [url]="this.movie5.url" [title]="this.movie5.title"
+                    [description]="this.movie5.description" [duration]="this.movie5.duration">
+                </app-card-movie>
             </div>
         </div>
-        <div class="listado2">
-            <app-card-movie-big [url]="this.movie?.url" [title]="this.movie?.title"></app-card-movie-big>
-            <app-card-movie-big [url]="this.movie?.url" [title]="this.movie?.title"></app-card-movie-big>
+        <div>
+            <div class="titulo-lista">
+                <h2>Tendencias hoy</h2>
+            </div>
+            <div class="listado2">
+                <app-card-movie-big [url]="this.bigMovie1.url" [title]="this.bigMovie1.title"
+                    [description]="this.bigMovie1.description" [duration]="this.bigMovie1.duration">
+                </app-card-movie-big>
+                <app-card-movie-big [url]="this.bigMovie2.url" [title]="this.bigMovie2.title"
+                    [description]="this.bigMovie2.description" [duration]="this.bigMovie2.duration">
+                </app-card-movie-big>
+            </div>
         </div>
         <div>
             <div class="titulo-lista">
                 <h2>Recomendaciones para vos</h2>
             </div>
             <div class="listado">
-                <app-card-movie [url]="this.movie?.url" [title]="this.movie?.title"></app-card-movie>
-                <app-card-movie [url]="this.movie2?.url" [title]="this.movie2?.title"></app-card-movie>
-                <app-card-movie [url]="this.movie3?.url" [title]="this.movie3?.title"></app-card-movie>
-                <app-card-movie [url]="this.movie4?.url" [title]="this.movie4?.title"></app-card-movie>
-                <app-card-movie [url]="this.movie5?.url" [title]="this.movie5?.title"></app-card-movie>
+                <app-card-movie [url]="this.movie.url" [title]="this.movie.title"></app-card-movie>
+                <app-card-movie [url]="this.movie2.url" [title]="this.movie2.title"></app-card-movie>
+                <app-card-movie [url]="this.movie3.url" [title]="this.movie3.title"></app-card-movie>
+                <app-card-movie [url]="this.movie4.url" [title]="this.movie4.title"></app-card-movie>
+                <app-card-movie [url]="this.movie5.url" [title]="this.movie5.title"></app-card-movie>
             </div>
         </div>
     </div>

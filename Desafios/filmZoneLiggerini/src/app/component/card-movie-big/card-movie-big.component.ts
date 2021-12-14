@@ -1,31 +1,39 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { CartService } from "../../service/cart.service";
+import { Card } from "../card-movie/card";
 
 @Component({
   selector: 'app-card-movie-big',
   templateUrl: './card-movie-big.component.html',
   styleUrls: ['./card-movie-big.component.scss']
 })
-export class CardMovieBigComponent implements OnInit {
+export class CardMovieBigComponent {
 
-  @Input() url: string | undefined;
-  @Input() title: string | undefined;
-  @Input() description: string | undefined;
-  @Input() duration: number | undefined;
+  @Input() url: string = '';
+  @Input() title: string = '';
+  @Input() description: string = '';
+  @Input() duration: string = '';
 
-  @Output() newMovie: any = new EventEmitter<any>();
+  movie: Card = {
+    url: '',
+    title: '',
+    description: '',
+    duration: ''
+  };
+  
 
-  constructor() { }
+  constructor(private cartService: CartService) {}
 
-  ngOnInit(): void {
-  }
 
-  agregarPeli() {
-    let movie = {
+  addToCart(movie: Card): void { 
+    movie = {
       url: this.url,
-      title: this.title
+      title: this.title,
+      description: this.description,
+      duration: this.duration
     }
-    this.newMovie.emit(movie);
-    
+    this.cartService.addToCart(movie);
   }
+
 
 }

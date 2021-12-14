@@ -7,13 +7,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  movie = { url: '', title: ''};
-  movie2 = { url: '', title: ''};
-  movie3 = { url: '', title: ''};
-  movie4 = { url: '', title: ''};
-  movie5 = { url: '', title: ''};
+  movie = { url: '', title: '', description: '', duration: ''};
+  movie2 = { url: '', title: '', description: '', duration: ''};
+  movie3 = { url: '', title: '', description: '', duration: ''};
+  movie4 = { url: '', title: '', description: '', duration: ''};
+  movie5 = { url: '', title: '', description: '', duration: ''};
+  bigMovie1 = { url: '', title: '', description: '', duration: ''};
+  bigMovie2 = { url: '', title: '', description: '', duration: ''};
 
-
+  listaCarrito: {}[] = [];
+  mostrarListaCarrito: boolean = false;
+  
   constructor() { 
     this.load();
   }
@@ -24,22 +28,44 @@ export class HomeComponent implements OnInit {
     this.movie = {
       url: 'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/poster-joker-2-1567010576.jpg?crop=1.00xw:0.349xh;0,0.137xh&resize=480:*',
       title: 'Joker',
+      description: 'LorLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non rhoncus ex, et congue enim. Phasellus dictum imperdiet lobortis. Donec imperdiet euismod ante, eu dignissim metus rutrum ut. In commodo aliquam hendrerit. Vivamus vitae lobortis tortor. Praesent rutrum leo non tellus interdum condimentum. Proin eget imperdiet massa, at rutrum tortor. Nam imperdiet pretium nisl eleifend vehicula. Quisque sed commodo libero. Praesent vel orci imperdiet, viverra ante facilisis, sagittis magna.em',
+      duration: '159m'
     };
     this.movie2 = {
       url: './../../../assets/got.jpg',
       title: 'Game of thrones',
+      description: 'LorLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non rhoncus ex, et congue enim. Phasellus dictum imperdiet lobortis. Donec imperdiet euismod ante, eu dignissim metus rutrum ut. In commodo aliquam hendrerit. Vivamus vitae lobortis tortor. Praesent rutrum leo non tellus interdum condimentum. Proin eget imperdiet massa, at rutrum tortor. Nam imperdiet pretium nisl eleifend vehicula. Quisque sed commodo libero. Praesent vel orci imperdiet, viverra ante facilisis, sagittis magna.em',
+      duration: '50m'
     };
     this.movie3 = {
       url: 'https://images6.alphacoders.com/750/thumb-350-750311.jpg',
       title: 'Mr robot',
+      description: 'LorLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non rhoncus ex, et congue enim. Phasellus dictum imperdiet lobortis. Donec imperdiet euismod ante, eu dignissim metus rutrum ut. In commodo aliquam hendrerit. Vivamus vitae lobortis tortor. Praesent rutrum leo non tellus interdum condimentum. Proin eget imperdiet massa, at rutrum tortor. Nam imperdiet pretium nisl eleifend vehicula. Quisque sed commodo libero. Praesent vel orci imperdiet, viverra ante facilisis, sagittis magna.em',
+      duration: '41m'
     };
     this.movie4 = {
       url: 'https://ichef.bbci.co.uk/news/640/cpsprodpb/BF0D/production/_106090984_2e39b218-c369-452e-b5be-d2476f9d8728.jpg',
       title: 'Avengers: endgame',
+      description: 'LorLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non rhoncus ex, et congue enim. Phasellus dictum imperdiet lobortis. Donec imperdiet euismod ante, eu dignissim metus rutrum ut. In commodo aliquam hendrerit. Vivamus vitae lobortis tortor. Praesent rutrum leo non tellus interdum condimentum. Proin eget imperdiet massa, at rutrum tortor. Nam imperdiet pretium nisl eleifend vehicula. Quisque sed commodo libero. Praesent vel orci imperdiet, viverra ante facilisis, sagittis magna.em',
+      duration: '172m'
     };
     this.movie5 = {
       url: 'https://images.squarespace-cdn.com/content/v1/587d33a54402432706c7e9e7/1560275527196-J4CIN6V5Z9VWUZ76FGQO/Once-Upon-A-Time-In-Hollywood-Poster-New-Header_1050_591_81_s_c1.jpg?format=2500w',
       title: 'Once upon a time in hollywood',
+      description: 'LorLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non rhoncus ex, et congue enim. Phasellus dictum imperdiet lobortis. Donec imperdiet euismod ante, eu dignissim metus rutrum ut. In commodo aliquam hendrerit. Vivamus vitae lobortis tortor. Praesent rutrum leo non tellus interdum condimentum. Proin eget imperdiet massa, at rutrum tortor. Nam imperdiet pretium nisl eleifend vehicula. Quisque sed commodo libero. Praesent vel orci imperdiet, viverra ante facilisis, sagittis magna.em',
+      duration: '120m'
+    };
+    this.bigMovie1 = {
+      url: 'https://www.mundiario.com/media/mundiario/images/2021/10/22/2021102216200260524.png',
+      title: 'Red notice',
+      description: 'LorLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non rhoncus ex, et congue enim. Phasellus dictum imperdiet lobortis. Donec imperdiet euismod ante, eu dignissim metus rutrum ut. In commodo aliquam hendrerit. Vivamus vitae lobortis tortor. Praesent rutrum leo non tellus interdum condimentum. Proin eget imperdiet massa, at rutrum tortor. Nam imperdiet pretium nisl eleifend vehicula. Quisque sed commodo libero. Praesent vel orci imperdiet, viverra ante facilisis, sagittis magna.em',
+      duration: '120m'
+    };
+    this.bigMovie2 = {
+      url: 'https://static1.colliderimages.com/wordpress/wp-content/uploads/2021/10/the-wheel-of-time-new-poster-social-featured.jpg',
+      title: 'The wheel of time',
+      description: 'LorLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non rhoncus ex, et congue enim. Phasellus dictum imperdiet lobortis. Donec imperdiet euismod ante, eu dignissim metus rutrum ut. In commodo aliquam hendrerit. Vivamus vitae lobortis tortor. Praesent rutrum leo non tellus interdum condimentum. Proin eget imperdiet massa, at rutrum tortor. Nam imperdiet pretium nisl eleifend vehicula. Quisque sed commodo libero. Praesent vel orci imperdiet, viverra ante facilisis, sagittis magna.em',
+      duration: '120m'
     };
   }
 

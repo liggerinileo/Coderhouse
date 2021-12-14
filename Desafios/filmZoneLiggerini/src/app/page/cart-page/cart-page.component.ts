@@ -1,4 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Card } from "./../../component/card-movie/card";
+import { CartService } from "../../service/cart.service";
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-cart-page',
@@ -7,17 +10,17 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class CartPageComponent implements OnInit {
 
-  list: any[] = [];
+  cartList$: Observable<Card[]> | undefined;
+  movie: {} = {};
 
-  constructor() { }
-
-  ngOnInit(): void {
-    console.log(this.list);
-    
+  constructor(private cartService: CartService) { 
+    this.cartList$ = cartService.cartList.asObservable();
   }
 
-  agregarList(movie: {}) {
-    this.list.push(movie);
+  ngOnInit(): void {}
+
+  agregarList() {
+    
   }
 
 }
