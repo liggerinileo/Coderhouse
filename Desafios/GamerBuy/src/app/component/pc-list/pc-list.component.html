@@ -1,0 +1,22 @@
+<div class="row" class="card text-center mt-2" *ngFor="let pcComponent of pcComponents">
+    <div class="col-12 cards">
+        <div class="col">
+            <img [src]="pcComponent.image" width="100" class="img-fluid" [alt]="pcComponent.name">
+        </div>
+        <div class="col">
+            <h5 class="card-title"><strong>{{pcComponent.name}}</strong></h5>
+            <h5 class="card-text">{{pcComponent.price | currency}}</h5>    
+        </div>
+        <div class="col">
+            <span class="badge badge-danger" *ngIf="pcComponent.stock==0">SIN STOCK</span>
+        </div>
+        <div class="col">
+            <div class="col">
+                <app-input-integer [(quantity)]="pcComponent.quantity" [max]="pcComponent.stock" *ngIf="pcComponent.stock"></app-input-integer>
+            </div>
+            <div class="col">
+                <button class="btn btn-primary mt-3" (click)="addToCart(pcComponent)">Comprar</button>
+            </div>
+        </div>
+    </div>
+</div>   

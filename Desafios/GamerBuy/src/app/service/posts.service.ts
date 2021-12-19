@@ -12,7 +12,11 @@ export class PostsService {
   constructor(protected http: HttpClient) { }
 
 
-  public get(): Observable<any> {
+  public getPosts(): Observable<any> {
     return this.http.get(this.api + '/posts');
+  }
+
+  public getPost(id: number): Observable<any> {
+    return this.http.get(this.api + '/posts/'+ id);
   }
 }

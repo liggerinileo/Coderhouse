@@ -10,12 +10,13 @@ export class PostsComponent implements OnInit {
 
   posts: any[] = [];
 
+
   constructor(private postsService: PostsService) { }
 
   ngOnInit(): void {
-    this.postsService.get().subscribe(data => {
+    this.postsService.getPosts().subscribe(data => {
       this.posts = data;
-      console.log(this.posts);
+
     }, (err: any) => {
       console.log(err);
       

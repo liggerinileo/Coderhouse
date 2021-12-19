@@ -13,7 +13,7 @@
                 <tr *ngFor="let post of this.posts" class="text-center">
                     <td>{{post.id}}</td>
                     <td>{{post.title}}</td>
-                    <td><a [routerLink]="['/posts/']">Ver post</a></td>
+                    <td><a [routerLink]="['/posts/', post.id]">Ver post</a></td>
                 </tr>
             </tbody>
         </table>

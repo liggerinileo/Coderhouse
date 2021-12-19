@@ -1,0 +1,7 @@
+<ul class="text-center">
+    <li *ngFor="let product of cartList$ | async">
+        <strong>{{product.name}}</strong><br>
+        <img [src]="product.image" width="100" class="img-fluid" [alt]="product.name"><br>
+        {{product.quantity}}
+    </li>
+</ul>
