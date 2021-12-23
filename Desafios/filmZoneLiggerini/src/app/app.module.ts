@@ -9,6 +9,7 @@ import { MatCardModule } from "@angular/material/card";
 import { MatGridListModule } from "@angular/material/grid-list";
 import { MatMenuModule } from "@angular/material/menu";
 import { MatListModule } from "@angular/material/list";
+import { HttpClientModule } from "@angular/common/http";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -42,7 +43,8 @@ import { CardMovieBigComponent } from './component/card-movie-big/card-movie-big
     MatCardModule,
     MatGridListModule,
     MatMenuModule,
-    MatListModule
+    MatListModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

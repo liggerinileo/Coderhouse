@@ -1,6 +1,6 @@
 <div style="display: flex; justify-content: center; height: 100vh; align-items: center;">
     <div class="card">
-        <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+        <form [formGroup]="signupForm" (ngSubmit)="save()">
             <div style="display: flex; justify-content: center; text-align: left; margin-bottom: 30px;">
                 <div class="crearCuenta">
                     <h1>Crear cuenta</h1>
@@ -10,38 +10,40 @@
             <div class="nombreApellido">
                 <mat-form-field appearance="outline">
                     <mat-label>Nombre completo</mat-label>
-                    <input matInput formControlName="nombreCompleto">
+                    <input matInput formControlName="fullname">
                 </mat-form-field>
               
                 <mat-form-field appearance="outline">
                     <mat-label>Nombre de usuario</mat-label>
-                    <input matInput formControlName="nombreUsuario">
+                    <input matInput formControlName="userName">
                 </mat-form-field>
             </div>
 
             <mat-form-field appearance="outline">
                 <mat-label>Enter your email</mat-label>
                 <input matInput placeholder="pat@example.com" formControlName="email" required>
-                <mat-error *ngIf="this.email_valido.errors?.email">Email inv&aacute;lido</mat-error>
+                <!--<mat-error *ngIf="this.email_valido.errors?.email">Email inv&aacute;lido</mat-error>-->
             </mat-form-field>
 
             <mat-form-field appearance="outline">
                 <mat-label>Contraseña</mat-label>
-                <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" (change)="checkPassword()">
+                <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
                 <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" 
                     [attr.aria-pressed]="hide" class="btn-visible">
                   <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                 </button>
+                <mat-error *ngIf="f.password?.errors?.required">Contraseña requerida</mat-error>
+                <mat-error *ngIf="f.password?.errors?.minLength || f.password?.errors?.maxLength">Debe contener entre 6 y 15 caracteres</mat-error>
             </mat-form-field>
 
             <mat-form-field appearance="outline">
                 <mat-label>Confirmar contraseña</mat-label>
-                <input matInput [type]="hide ? 'password' : 'text'" formControlName="confirmarPassword" (change)="onConfirmPassword()">
-                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" 
-                    [attr.aria-pressed]="hide" class="btn-visible">
-                  <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                <input matInput [type]="hide2 ? 'password' : 'text'" formControlName="confirm_password">
+                <button mat-icon-button matSuffix (click)="hide2 = !hide2" [attr.aria-label]="'Hide password'" 
+                    [attr.aria-pressed]="hide2" class="btn-visible">
+                  <mat-icon>{{hide2 ? 'visibility_off' : 'visibility'}}</mat-icon>
                 </button>
-                <mat-error *ngIf="confirm_password.hasError('mismatch')">Las contraseñas no coinciden</mat-error>
+                <mat-error *ngIf="f.confirm_password?.errors?.confirmedValidator">Las contraseñas no coinciden</mat-error>
             </mat-form-field>
 
             <div style="margin-top: 40px;">

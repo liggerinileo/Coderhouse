@@ -1,43 +1,53 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { UsersService } from "../../service/users/users.service";
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
   floatLabelControl = new FormControl('auto');
   hide = true;
-  user: string | undefined;
-  pass: string | undefined;
+
+  constructor(private fb: FormBuilder, private router: Router, private userService: UsersService) { }
 
   loginForm = this.fb.group({
-    nombreUsuario: [
+    userName: [
       '', 
       [Validators.required]
     ],
-    contraseña: [
+    password: [
       '', 
       [Validators.required]
     ]
     
   });
 
-  constructor(private fb: FormBuilder, private router: Router) { }
+  login() {
+    let userInput = this.loginForm.value;
+    this.userService.getAll('').subscribe(users => {
+      const userSaved = users.filter((user: any) => user.userName == this.loginForm.value.userName);
+      
+      if (userSaved?.length > 0) {
+        if (userSaved[0]?.password == userInput?.password) {
+          this.router.navigate(['/home']);
 
-  ngOnInit(): void {
-    this.user = "ligge10";
-    this.pass = "Leo35418660"
-  }
+        } else {
+          alert('La contraseña es incorrecta');
 
-  onSubmit() {
-    /*if (this.loginForm.value.nombreUsuario == this.user && this.loginForm.value.contraseña == this.pass) {
-      this.router.navigate(['/home']);
-    }*/
-    this.router.navigate(['/home']);
+        }
+      } else {
+        alert('El nombre de usuario ' + userInput.userName + ' no existe');
+
+      }
+    }, error => {
+      console.log(error);
+
+    });
   }
 
 }

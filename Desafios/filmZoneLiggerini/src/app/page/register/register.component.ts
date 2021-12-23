@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { Router } from "@angular/router";
+import { ConfirmedValidator } from "./confirmed.validator";
+import { UsersService } from "../../service/users/users.service";
 
 @Component({
   selector: 'app-register',
@@ -10,16 +12,18 @@ import { Router } from "@angular/router";
 })
 export class RegisterComponent implements OnInit {
   hide = true;
-  user: string | undefined;
-  pass: string | undefined;
-  strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})");
+  hide2 = true;
+
+  constructor(private fb: FormBuilder, private router: Router, private userService: UsersService) { }
+
+  ngOnInit(): void { }
 
   signupForm = this.fb.group({
-    nombreCompleto: [
+    fullname: [
       '', 
       [Validators.required]
     ],
-    nombreUsuario: [
+    userName: [
       '', 
       [Validators.required]
     ],
@@ -28,11 +32,10 @@ export class RegisterComponent implements OnInit {
       [
         Validators.required,
         Validators.minLength(6),
-        Validators.maxLength(15),
-        Validators.pattern(this.strongRegex)
+        Validators.maxLength(15)
       ]
     ],
-    confirmarPassword: [
+    confirm_password: [
       '', 
       [Validators.required]
     ],
@@ -43,45 +46,48 @@ export class RegisterComponent implements OnInit {
         Validators.email
       ]
     ]
-    
-  });
-
-  constructor(private fb: FormBuilder, private router: Router) { }
-
-  ngOnInit(): void {
-    this.user = "ligge10";
-    this.pass = "Leo35418660"
+  },
+  {
+    validator: ConfirmedValidator('password', 'confirm_password')
   }
+  );
 
-  onSubmit() {
-    this.router.navigate(['/login']);
-  }
-
-  onConfirmPassword() {
-    if (this.confirm_password.value == this.password.value) {
-      this.confirm_password.setErrors(null);
-    } else {
-      this.confirm_password.setErrors({ mismatch: true });
+  save() {
+    let usuarioRepetido = false;
+    let user = {
+      fullname: this.signupForm?.value?.fullname,
+      userName: this.signupForm?.value?.userName,
+      email: this.signupForm?.value?.email,
+      password: this.signupForm?.value?.password
     }
+    this.userService.getAll('').subscribe(users => {
+      users.forEach((e: any) => {
+        if (e.userName == user.userName) {
+          usuarioRepetido = true;
+
+        }
+      });
+      if (!usuarioRepetido) {
+        this.userService.createUser(user).subscribe(res => {
+          console.log(res);
+          this.router.navigate(['/login']);
+
+        }, error => {
+          console.log(error);
+
+        });
+      } else {
+        alert('El nombre de usuario ' + user.userName + ' ya existe, elija otro por favor.');
+
+      }
+    }, error => {
+      console.log(error);
+
+    });
   }
 
-  checkPassword() {
-    if (!this.password.valid) {
-      this.password.setErrors({ mismatch: true });
-
-    }
-  }
-
-  get password(): AbstractControl {
-    return this.signupForm.controls['password'];
-  }
-
-  get confirm_password(): AbstractControl {
-    return this.signupForm.controls['confirmarPassword'];
-  }
-
-  get email_valido(): AbstractControl {
-    return this.signupForm.controls['email'];
+  get f(){
+    return this.signupForm.controls;
   }
 
 }
