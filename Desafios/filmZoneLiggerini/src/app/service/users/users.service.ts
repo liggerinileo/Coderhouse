@@ -14,7 +14,8 @@ export class UsersService extends EntityService {
       fullname: user?.fullname,
       userName: user?.userName,
       email: user?.email,
-      password: user?.password
+      password: user?.password,
+      admin: false
     }
     return this.http.post(this.getBaseUrl(), body);
   }
@@ -25,7 +26,8 @@ export class UsersService extends EntityService {
       lastName: user?.lastName,
       userName: user?.userName,
       email: user?.email,
-      password: user?.password
+      password: user?.password,
+      admin: user?.admin
     }
     return this.http.patch(this.getBaseUrl() + '/' + user.id, body);
   }
