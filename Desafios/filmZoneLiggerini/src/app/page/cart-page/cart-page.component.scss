@@ -57,7 +57,7 @@
 }
 
 .movie-title {
-    width: 300px;
+    width: 320px;
 }
 
 .movie-duration, .movie-price,  .movie-title, .movie-delete{
@@ -69,9 +69,10 @@
 
 .movie-delete {
     padding-top: 12px;
+    margin-left: 25px;
 }
 
 .movie-duration, .movie-price, .movie-delete{
-    width: 100px;
+    width: 110px;
 }
 

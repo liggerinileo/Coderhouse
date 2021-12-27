@@ -19,15 +19,20 @@
                         <p>{{movie.duration}}</p>
                     </div>
                     <div class="movie-price">
-                        <p>{{movie.price}}</p>
+                        <p>{{movie.price | currency}}</p>
                     </div>
                     <div class="movie-delete">
-                        <a mat-fab color="warn">
+                        <a mat-fab color="warn" (click)="delete(movie.id)">
                             <mat-icon>delete</mat-icon>
                         </a>
                     </div>
                 </li>
             </ul>
         </div>
+    </div>
+    <div style="margin-top: 14%; display: flex; justify-content: center;">
+        <a mat-raised-button color="warn" [routerLink]="['/home']" style="width: 150px;">
+            Volver
+        </a>  
     </div>
 </div>

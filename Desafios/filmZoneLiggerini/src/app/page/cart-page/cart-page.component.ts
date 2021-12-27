@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Card } from "./../../component/card-movie/card";
 import { CartService } from "../../service/cart/cart.service";
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart-page',
@@ -12,7 +13,7 @@ export class CartPageComponent implements OnInit {
 
   cartList: Card[] = [];
 
-  constructor(private cartService: CartService) {}
+  constructor(private router: Router, private cartService: CartService) {}
 
   ngOnInit(): void {
     this.load();
@@ -28,8 +29,15 @@ export class CartPageComponent implements OnInit {
     });
   }
 
-  delete() {
-    
+  delete(id: any) {
+    this.cartService.deleteMovie(id).subscribe(res => {
+      console.log(res);
+      this.load();
+
+    }, error => {
+      console.log(error);
+
+    });
   }
 
 }
