@@ -10,6 +10,8 @@ import { MatGridListModule } from "@angular/material/grid-list";
 import { MatMenuModule } from "@angular/material/menu";
 import { MatListModule } from "@angular/material/list";
 import { HttpClientModule } from "@angular/common/http";
+import { MatCheckboxModule } from "@angular/material/checkbox";
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,6 +22,7 @@ import { HomeComponent } from './page/home/home.component';
 import { CardMovieComponent } from './component/card-movie/card-movie.component';
 import { CartPageComponent } from './page/cart-page/cart-page.component';
 import { CardMovieBigComponent } from './component/card-movie-big/card-movie-big.component';
+import { CreateMovieComponent } from './page/create-movie/create-movie.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +32,8 @@ import { CardMovieBigComponent } from './component/card-movie-big/card-movie-big
     HomeComponent,
     CardMovieComponent,
     CartPageComponent,
-    CardMovieBigComponent
+    CardMovieBigComponent,
+    CreateMovieComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +48,9 @@ import { CardMovieBigComponent } from './component/card-movie-big/card-movie-big
     MatGridListModule,
     MatMenuModule,
     MatListModule,
-    HttpClientModule
+    HttpClientModule,
+    MatCheckboxModule,
+    FormsModule      
   ],
   providers: [],
   bootstrap: [AppComponent]

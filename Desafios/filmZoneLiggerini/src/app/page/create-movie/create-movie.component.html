@@ -1,0 +1,69 @@
+<div style="display: flex; justify-content: center; height: 100vh; align-items: center;">
+    <div class="card">
+        <form [formGroup]="uploadMovieForm" (ngSubmit)="save()">
+            <div style="display: flex; justify-content: center; text-align: left; margin-bottom: 30px;">
+                <div class="crearCuenta">
+                    <h1 style="color: rgb(20, 20, 94);">Subir pelicula</h1>
+                </div>
+            </div>
+
+            <div class="nombreAñoDur">
+                <mat-form-field appearance="outline" class="nombre">
+                    <mat-label>Nombre pelicula</mat-label>
+                    <input matInput formControlName="name">
+                </mat-form-field>
+              
+                <mat-form-field appearance="outline" class="año">
+                    <mat-label>Año</mat-label>
+                    <input matInput type="number" formControlName="year">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="duracion">
+                    <mat-label>Duraci&oacute;n</mat-label>
+                    <input matInput formControlName="duration">
+                </mat-form-field>
+            </div>
+
+            <div class="urlImgPrice">
+                <mat-form-field appearance="outline" class="url">
+                    <mat-label>Url imagen</mat-label>
+                    <input matInput formControlName="image">
+                </mat-form-field>
+                
+                <mat-form-field appearance="outline" class="precio">
+                    <mat-label>Precio</mat-label>
+                    <input matInput type="number" formControlName="price">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="genero">
+                    <mat-label>G&eacute;nero/s</mat-label>
+                    <input matInput formControlName="genre">
+                </mat-form-field>
+            </div>
+
+            <div class="categorias">
+                <mat-checkbox formControlName="continuar">Continuar viendo</mat-checkbox>
+                <mat-checkbox formControlName="tendencias">Tendencias</mat-checkbox>
+                <mat-checkbox formControlName="recomendaciones">Recomendaciones</mat-checkbox>
+                <mat-checkbox formControlName="estrenos">Estrenos</mat-checkbox>
+            </div>
+
+            <div class="descripcion">
+                <mat-form-field appearance="outline">
+                    <mat-label>Descripci&oacute;n</mat-label>
+                    <textarea matInput formControlName="description"></textarea>
+                </mat-form-field>
+            </div>
+            
+            <div style="margin-top: 40px;">
+                <button mat-raised-button color="primary" [disabled]="!uploadMovieForm.valid"
+                    style="width: 150px;">
+                    Crear
+                </button>
+                <button mat-raised-button color="warn" (click)="volver()" style="margin-left: 10px; width: 150px;">
+                    Cancelar
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

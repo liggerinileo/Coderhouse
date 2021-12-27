@@ -29,11 +29,12 @@ export class LoginComponent {
 
   login() {
     let userInput = this.loginForm.value;
-    this.userService.getAll('').subscribe(users => {
+    this.userService.getAll().subscribe(users => {
       const userSaved = users.filter((user: any) => user.userName == this.loginForm.value.userName);
       
       if (userSaved?.length > 0) {
         if (userSaved[0]?.password == userInput?.password) {
+          this.userService.setUser(userSaved);
           this.router.navigate(['/home']);
 
         } else {

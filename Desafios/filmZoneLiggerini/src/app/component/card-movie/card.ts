@@ -1,6 +1,12 @@
 export interface Card {
-    url: string;
-    title: string;
+    id: any;
+    image: string;
+    name: string;
     description: string,
-    duration: string
+    duration: string,
+    year: number,
+    price: number,
+    genre: string[],
+    filmZoneCategory: string[],
+    addedToCart: boolean
 }

@@ -1,6 +1,6 @@
 .card {
     width: 18.7vw;
-    height: 25vh;
+    height: 27vh;
     margin-bottom: 80px;
     border: none;
     border-radius: 10%;
@@ -18,7 +18,7 @@
 
 a {
     position: relative;
-    top: -30%;
+    top: -32%;
     left: 80%;
     transition: 0.4s;
     display:none;
@@ -27,11 +27,12 @@ a {
 .titulo {
     color: white;
     position: absolute;
-    font-size: 25px;
+    font-size: 22px;
     padding-left: 7px;
     padding-top: 7px;
     transition: 0.4s;
-    display:none;
+    width: 20%;
+    display: none;
 }
 
 .card:hover {

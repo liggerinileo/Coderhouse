@@ -16,12 +16,8 @@
     font-weight: 500;
 }
 
-mat-list-item {
-    height: 100px !important;
-}
-
 .listado {
-    width: 100vw;
+    width: 100%;
     display: flex;
     justify-content: center;
     margin-top: 75px;
@@ -61,10 +57,21 @@ mat-list-item {
 }
 
 .movie-title {
+    width: 300px;
+}
+
+.movie-duration, .movie-price,  .movie-title, .movie-delete{
     display: flex;
     justify-content: center;
-    width: 1000px;
     padding-left: 25px;
     padding-right: 25px;
+}
+
+.movie-delete {
+    padding-top: 12px;
+}
+
+.movie-duration, .movie-price, .movie-delete{
+    width: 100px;
 }
 

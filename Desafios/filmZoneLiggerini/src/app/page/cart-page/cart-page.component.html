@@ -10,13 +10,21 @@
         </div>
         <div class="listado">
             <ul>
-                <li *ngFor="let movie of cartList$?.source | async">
-                    <img [src]="movie.url" alt="">
+                <li *ngFor="let movie of cartList">
+                    <img [src]="movie.image" alt="">
                     <div class="movie-title">
-                        <h2>{{movie.title}}</h2>
+                        <h2>{{movie.name}}</h2>
                     </div>
-                    <div class="movie-description">
-                        <p>{{movie.description}}</p>
+                    <div class="movie-duration">
+                        <p>{{movie.duration}}</p>
+                    </div>
+                    <div class="movie-price">
+                        <p>{{movie.price}}</p>
+                    </div>
+                    <div class="movie-delete">
+                        <a mat-fab color="warn">
+                            <mat-icon>delete</mat-icon>
+                        </a>
                     </div>
                 </li>
             </ul>

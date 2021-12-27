@@ -1,25 +1,38 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Card } from "../../component/card-movie/card";
+import { EntityService } from '../entity-service.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CartService {
+export class CartService extends EntityService {
 
-  private _cartList: Card[] = [];
-  cartList: BehaviorSubject<Card[]> = new BehaviorSubject(this._cartList);
+  protected path: string = 'cart';
 
-  constructor() { }
+  addToCart(movie: Card) {
+    this.getAll().subscribe(movies => {
+      let item: Card | undefined = movies.find((v1: { name: string; }) => v1.name == movie.name);
+      if (!item) {
+        this.addMovie(movie).subscribe(res => {
+          console.log(res);
 
-  addToCart(card: Card) {
-    let item: Card | undefined = this._cartList.find(v1 => v1.title == card.title);
-    if (!item) {
-      this._cartList.push({... card});
-    }
-    console.log(this._cartList);
+        }, error => {
+          console.log(error);
 
-    // Emito el cambio que hubo
-    this.cartList.next(this._cartList);
+        });
+      }
+    }, error => {
+      console.log(error);
+
+    });
+  }
+
+  addMovie(movie: Card): Observable<any> {
+    return this.http.post(this.getBaseUrl(), movie);
+  }
+
+  deleteMovie(id: number): Observable<any> {
+    return this.http.delete(this.getBaseUrl() + '/' + id);
   }
 }

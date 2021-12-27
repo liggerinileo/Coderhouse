@@ -16,13 +16,13 @@ export abstract class EntityService {
     return environment.baseApiUrl + this.path;
   }
 
-  public getAll(findBy: string | null): Observable<any> {
-    return this.http.get(this.getBaseUrl() + findBy);
+  public getAll(): Observable<any> {
+    return this.http.get(this.getBaseUrl());
 
   }
 
-  public get(findBy: string | null, id: number | null): Observable<any> {
-    return this.http.get(this.getBaseUrl() + findBy + '/' + id);
+  public get(id: number): Observable<any> {
+    return this.http.get(this.getBaseUrl() + '/' + id);
   
   }
 

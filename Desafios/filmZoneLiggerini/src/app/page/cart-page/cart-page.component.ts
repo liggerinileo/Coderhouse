@@ -10,16 +10,25 @@ import { Observable } from 'rxjs';
 })
 export class CartPageComponent implements OnInit {
 
-  cartList$: Observable<Card[]> | undefined;
-  movie: {} = {};
+  cartList: Card[] = [];
 
-  constructor(private cartService: CartService) { 
-    this.cartList$ = cartService.cartList.asObservable();
+  constructor(private cartService: CartService) {}
+
+  ngOnInit(): void {
+    this.load();
   }
 
-  ngOnInit(): void {}
+  load() {
+    this.cartService.getAll().subscribe(movies => {
+      this.cartList = movies;
 
-  agregarList() {
+    }, error => {
+      console.log(error);
+
+    });
+  }
+
+  delete() {
     
   }
 

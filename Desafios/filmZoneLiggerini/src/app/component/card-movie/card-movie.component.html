@@ -1,10 +1,13 @@
 <div class="card">
-    <h1 class="titulo">{{ this.title }}</h1>
+    <h1 class="titulo">{{ this.name }}</h1>
     
-    <img [src]="this.url">
+    <img [src]="this.image">
     
-    <a mat-mini-fab color="basic" (click)="addToCart(this.movie)">
+    <a *ngIf="!addedToC" mat-mini-fab color="basic" (click)="addToCart()">
         <mat-icon>add_shopping_cart</mat-icon>
+    </a>
+    <a *ngIf="addedToC" mat-mini-fab color="primary">
+        <mat-icon>done_outline</mat-icon>
     </a>
 </div>
 

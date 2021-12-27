@@ -8,6 +8,15 @@ import { EntityService } from "../entity-service.service";
 export class UsersService extends EntityService {
   
   protected path: string = 'users';
+  user: any;
+
+  setUser(user: any) {
+    this.user = user;
+  }
+
+  getUser() {
+    return this.user;
+  }
 
   createUser(user: any): Observable<any> {
     let body = {

@@ -61,7 +61,7 @@ export class RegisterComponent implements OnInit {
       password: this.signupForm?.value?.password,
       admin: false
     }
-    this.userService.getAll('').subscribe(users => {
+    this.userService.getAll().subscribe(users => {
       users.forEach((e: any) => {
         if (e.userName == user.userName) {
           usuarioRepetido = true;
