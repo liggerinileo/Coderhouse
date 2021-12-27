@@ -53,5 +53,19 @@
                 </div>
             </div>
         </div>
+        <div>
+            <div class="titulo-lista">
+                <h2>Estrenos</h2>
+            </div>
+            <div class="listado">
+                <div *ngFor="let movie of this.estrenos">
+                    <app-card-movie [image]="movie.image" [name]="movie.name" [year]="movie.year" 
+                        [price]="movie.price" [description]="movie.description" [duration]="movie.duration" 
+                        [genre]="movie.genre" [filmZoneCategory]="movie.filmZoneCategory" 
+                        [id]="movie.id" [addedToCart]="movie.addedToCart">
+                    </app-card-movie>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

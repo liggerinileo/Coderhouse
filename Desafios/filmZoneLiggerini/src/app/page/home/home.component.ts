@@ -13,6 +13,7 @@ export class HomeComponent {
   continuarViendo: Card[] = [];
   tendencias: Card[] = [];
   recomendaciones: Card[] = [];
+  estrenos: Card[] = [];
   admin: boolean = false;
   
   constructor(private moviesService: MoviesService, private userService: UsersService) { 
@@ -29,7 +30,8 @@ export class HomeComponent {
       this.continuarViendo = movies.filter((movie: any) => movie.filmZoneCategory.includes("continuar-viendo"));
       this.tendencias = movies.filter((movie: any) => movie.filmZoneCategory.includes("tendencias"));
       this.recomendaciones = movies.filter((movie: any) => movie.filmZoneCategory.includes("recomendaciones"));
-      console.log(movies);
+      this.estrenos = movies.filter((movie: any) => movie.filmZoneCategory.includes("estrenos"));
+      
     }, error => {
       console.log(error);
 
