@@ -1,0 +1,31 @@
+<div class="cardd">
+    <h1 class="titulo">{{ this.name }}</h1>
+    
+    <img [src]="this.image">
+    
+    <div class="links">
+        <a *ngIf="!addedToC" class="cart" mat-mini-fab color="basic" (click)="addToCart()">
+            <mat-icon>add_shopping_cart</mat-icon>
+        </a>
+    
+        <a *ngIf="addedToC" class="cart" mat-mini-fab color="primary">
+            <mat-icon>done_outline</mat-icon>
+        </a>    
+    </div>
+    <a *ngIf="admin" mat-mini-fab color="basic" class="edit" (click)="edit()">
+        <mat-icon>edit</mat-icon>
+    </a>
+    <a *ngIf="admin" mat-mini-fab color="warn" class="delete" (click)="openModal(eliminar)">
+        <mat-icon>delete</mat-icon>
+    </a>
+</div>
+
+<ng-template #eliminar let-modal>
+    <div class="modal-body">
+        <p class="modal-title" id="modal-basic-title">¿Quiere eliminar la pelicula?</p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="delete()">Confirmar</button>
+        <button type="button" class="btn btn-outline-primary" (click)="dismiss()">Cancelar</button>
+    </div>
+</ng-template>

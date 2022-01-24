@@ -1,0 +1,44 @@
+<div style="display: flex; justify-content: center; height: 100vh; align-items: center;">
+    <div class="card">
+        <form [formGroup]="loginForm" (ngSubmit)="login()">
+            <div style="display: flex; justify-content: center; text-align: left; margin-bottom: 30px;">
+                <div class="iniciarSesion">
+                    <h1 style="color: rgb(20, 20, 94);">Iniciar sesi&oacute;n</h1>
+                </div>
+            </div>
+            <mat-form-field appearance="outline" [floatLabel]="floatLabelControl.value">
+                <mat-label>Usuario</mat-label>
+                <input matInput formControlName="userName">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>password</mat-label>
+                <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" 
+                    [attr.aria-pressed]="hide" class="btn-visible">
+                  <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+            </mat-form-field>
+            
+            <div style="display: flex; justify-content: center; text-align: left;">
+                <div class="olvidoPassDiv">
+                    <a href="" class="olvidoPass">¿Olvidaste tu contraseña?</a>
+                </div>
+            </div>
+
+            <div style="margin-top: 40px;">
+                <button mat-raised-button color="primary" [disabled]="!loginForm.valid">
+                    Iniciar sesi&oacute;n
+                </button>
+            </div>
+
+            <div style="margin-top: 40px;">
+                <p style="font-size: 18px;">¿No tienes cuenta? 
+                    <span>
+                        <a class="olvidoPass" [routerLink]="['/register']" routerLinkActive="active">Registrate ya</a>
+                    </span>
+                </p>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,35 @@
+.card {
+    height: 550px; 
+    width: 500px;
+    background: rgb(255,255,255);
+    background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(207,194,219,1) 100%);
+    -webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.35);
+    -moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.35);
+    box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.35);
+    border: none;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.crearCuenta h1 {
+    font-weight: 500;
+    font-size: 35px;
+}
+
+mat-form-field, .olvidoPassDiv, .crearCuenta {
+    width: 400px;
+}
+
+.btn-visible {
+    border: none;
+    background: transparent;
+}
+
+form {
+    text-align: center;
+}
+
+
+

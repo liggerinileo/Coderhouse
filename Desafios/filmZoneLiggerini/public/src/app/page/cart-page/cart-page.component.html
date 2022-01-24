@@ -1,0 +1,57 @@
+<div class="carro">
+    <div class="imagen-header">
+        <a [routerLink]="['/home']">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/4/4c/The_Film_Zone_logo.PNG" alt="">
+        </a>
+    </div>
+    <div class="lista">
+        <div class="titulo-lista">
+            <h1>Lista de compras</h1>
+        </div>
+        <div class="listado">
+            <ul>
+                <li *ngFor="let movie of cartList">
+                    <img [src]="movie?.image" alt="">
+                    <div class="movie-title">
+                        <h2>{{movie?.name}}</h2>
+                    </div>
+                    <div class="movie-duration">
+                        <p>{{movie?.duration}}</p>
+                    </div>
+                    <div class="movie-price">
+                        <p>{{movie?.price | currency}}</p>
+                    </div>
+                    <div class="movie-client">
+                        <p>
+                            <span style="font-weight: 500; font-size: 15px;">Usuario: </span>
+                            &nbsp; {{movie?.client}}
+                        </p>
+                    </div>
+                    <div class="movie-delete">
+                        <a mat-fab color="warn" (click)="openModal(eliminar, movie?._id)">
+                            <mat-icon>delete</mat-icon>
+                        </a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div *ngIf="this.sumaTotal > 0" class="titulo-total">
+            <h3>Precio total:&nbsp; {{this.sumaTotal | currency}}</h3>
+        </div>
+    </div>
+    <div style="margin-top: 4%; display: flex; justify-content: center; padding-bottom: 14%;">
+        <a mat-raised-button color="warn" [routerLink]="['/home']" style="width: 150px;">
+            Volver
+        </a>  
+    </div>
+</div>
+
+<ng-template #eliminar let-modal>
+    <div class="modal-body">
+        <p class="modal-title" id="modal-basic-title">¿Quiere eliminar la pelicula?</p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="delete()">Confirmar</button>
+        <button type="button" class="btn btn-outline-primary" (click)="dismiss()">Cancelar</button>
+    </div>
+</ng-template>
