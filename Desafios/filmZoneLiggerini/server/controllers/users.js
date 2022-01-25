@@ -1,5 +1,6 @@
 const { response } = require("express");
 const User = require("../models/User");
+const { generateJWT } = require("../helpers/jwt");
 
 const getUsers = async (req, res = response) => {
     User.find()
@@ -39,7 +40,7 @@ const createUser = async (req, res = response) => {
     res.status(202).json({
         status: "OK",
         user,
-        code: 202
+        code: 202,
           
     });
     
@@ -65,13 +66,14 @@ const login = async (req, res = response) => {
         });
       }
   
-      //const token = await generarJWT(dbUser.id, dbUser.name);
+      const token = await generateJWT(user._id, user.userName);
   
       return res.status(200).json({
         status: "ok",
         code: 200,
         user,
-        //token,
+        token
+
       });
     } catch (error) {
       console.log(error);
@@ -83,6 +85,6 @@ const login = async (req, res = response) => {
         
       });
     }
-  };
+};
 
 module.exports = { getUsers, createUser, login };

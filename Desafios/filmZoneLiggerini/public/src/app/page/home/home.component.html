@@ -3,7 +3,7 @@
         <a [routerLink]="['/home']">
             <img src="https://upload.wikimedia.org/wikipedia/commons/4/4c/The_Film_Zone_logo.PNG" alt="">
         </a>
-        <a mat-fab color="basic" [routerLink]="['/']" matTooltip="CERRAR SESION" class="carrito">
+        <a mat-fab color="basic" (click)="logout()" matTooltip="CERRAR SESION" class="carrito">
             <mat-icon>person</mat-icon>
         </a>
         <a mat-fab color="basic" [routerLink]="['/cart']"  matTooltip="CARRITO" class="carrito">

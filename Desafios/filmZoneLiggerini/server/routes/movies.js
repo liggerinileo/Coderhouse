@@ -1,5 +1,6 @@
 const { Router } = require("express");
 const { check } = require("express-validator");
+const { validarToken } = require("../middlewares/validar-jwt");
 
 const { getMovies, getMovie, updateMovie, add, deleteMovie } = require("../controllers/movies");
 
@@ -17,7 +18,7 @@ const checkValidation = [
 router.get("/", getMovies);
 router.get("/:id", getMovie);
 router.put("/:id", checkValidation, updateMovie);
-router.post("/add", add);
+router.post("/add", validarToken, add);
 router.delete("/:id", deleteMovie);
 
 module.exports = router;

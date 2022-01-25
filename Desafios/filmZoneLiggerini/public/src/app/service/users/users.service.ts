@@ -27,16 +27,4 @@ export class UsersService extends EntityService {
     return this.http.post(this.getBaseUrl() + '/add', user);
   }
 
-  editUser(user: any): Observable<any> {
-    let body = {
-      name: user?.name,
-      lastName: user?.lastName,
-      userName: user?.userName,
-      email: user?.email,
-      password: user?.password,
-      admin: user?.admin
-    }
-    return this.http.patch(this.getBaseUrl() + '/' + user.id, body);
-  }
-
 }

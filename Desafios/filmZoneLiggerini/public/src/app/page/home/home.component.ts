@@ -1,4 +1,5 @@
 import { Component } from "@angular/core";
+import { Router } from "@angular/router";
 import { Movie } from "src/app/models/Movie";
 import { MoviesService } from "src/app/service/movies/movies.service";
 import { UsersService } from "src/app/service/users/users.service";
@@ -16,7 +17,7 @@ export class HomeComponent {
   estrenos: Movie[] = [];
   admin: boolean = false;
   
-  constructor(private moviesService: MoviesService, private userService: UsersService) { 
+  constructor(private moviesService: MoviesService, private router: Router, private userService: UsersService) { 
     this.load();
   }
 
@@ -38,5 +39,10 @@ export class HomeComponent {
 
     });
   } 
+
+  logout() {
+    localStorage.clear();
+    this.router.navigate(['/home']);
+  }
 
 }

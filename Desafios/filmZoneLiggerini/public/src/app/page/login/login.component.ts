@@ -31,6 +31,8 @@ export class LoginComponent {
     let userInput = this.loginForm.value;
     this.userService.login(userInput).subscribe(res => {
       this.userService.setUser(res?.user);
+      console.log(res);
+      localStorage.setItem('token', res?.token!);
       this.router.navigate(['/home']);
 
     }, error => {

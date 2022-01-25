@@ -5,6 +5,7 @@ import { LoginComponent } from "./page/login/login.component";
 import { RegisterComponent } from "./page/register/register.component";
 import { CartPageComponent } from "./page/cart-page/cart-page.component";
 import { CreateMovieComponent } from "./page/create-movie/create-movie.component";
+import { AdminGuard } from './guards/admin.guard';
 
 const routes: Routes = [
   
@@ -18,7 +19,8 @@ const routes: Routes = [
   },
   {
     path: 'create',
-    component: CreateMovieComponent
+    component: CreateMovieComponent,
+    canActivate: [AdminGuard],
   },
   {
     path: 'login',
