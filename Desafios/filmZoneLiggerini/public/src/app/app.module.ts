@@ -9,7 +9,7 @@ import { MatCardModule } from "@angular/material/card";
 import { MatGridListModule } from "@angular/material/grid-list";
 import { MatMenuModule } from "@angular/material/menu";
 import { MatListModule } from "@angular/material/list";
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { FormsModule } from '@angular/forms';
@@ -25,6 +25,7 @@ import { CartPageComponent } from './page/cart-page/cart-page.component';
 import { CardMovieBigComponent } from './component/card-movie-big/card-movie-big.component';
 import { CreateMovieComponent } from './page/create-movie/create-movie.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { XhrInterceptor } from './interceptors/xhr.interceptor';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     FormsModule,
     NgbModule      
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: XhrInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
