@@ -9,7 +9,7 @@
         <a mat-fab color="basic" [routerLink]="['/cart']"  matTooltip="CARRITO" class="carrito">
             <mat-icon>shopping_cart</mat-icon>
         </a>
-        <a *ngIf="admin" mat-fab color="basic" [routerLink]="['/create']" matTooltip="AGREGAR PELICULA" class="carrito">
+        <a *ngIf="admin" mat-fab color="basic" (click)="toCreate()" matTooltip="AGREGAR PELICULA" class="carrito">
             <mat-icon>cloud_upload</mat-icon>
         </a>
     </div>
@@ -20,10 +20,7 @@
             </div>
             <div class="listado">
                 <div *ngFor="let movie of this.continuarViendo">
-                    <app-card-movie [image]="movie.image" [name]="movie.name" [year]="movie.year" 
-                        [price]="movie.price" [description]="movie.description" [duration]="movie.duration" 
-                        [genre]="movie.genre" [filmZoneCategory]="movie.filmZoneCategory" 
-                        [id]="movie.id" [addedToCart]="movie.addedToCart">
+                    <app-card-movie [movie]="movie" (load)="reloadMovies($event)">
                     </app-card-movie>
                 </div>
             </div>
@@ -34,10 +31,7 @@
             </div>
             <div class="listado2">
                 <div *ngFor="let movie of this.tendencias">
-                    <app-card-movie-big [image]="movie.image" [name]="movie.name" [year]="movie.year" 
-                        [price]="movie.price" [description]="movie.description" [duration]="movie.duration" 
-                        [genre]="movie.genre" [filmZoneCategory]="movie.filmZoneCategory" 
-                        [id]="movie.id" [addedToCart]="movie.addedToCart">
+                    <app-card-movie-big [movie]="movie" (load)="reloadMovies($event)">
                     </app-card-movie-big>
                 </div>
             </div>
@@ -48,10 +42,7 @@
             </div>
             <div class="listado">
                 <div *ngFor="let movie of this.recomendaciones">
-                    <app-card-movie [image]="movie.image" [name]="movie.name" [year]="movie.year" 
-                        [price]="movie.price" [description]="movie.description" [duration]="movie.duration" 
-                        [genre]="movie.genre" [filmZoneCategory]="movie.filmZoneCategory" 
-                        [id]="movie.id" [addedToCart]="movie.addedToCart">
+                    <app-card-movie [movie]="movie">
                     </app-card-movie>
                 </div>
             </div>
@@ -62,10 +53,7 @@
             </div>
             <div class="listado">
                 <div *ngFor="let movie of this.estrenos">
-                    <app-card-movie [image]="movie.image" [name]="movie.name" [year]="movie.year" 
-                        [price]="movie.price" [description]="movie.description" [duration]="movie.duration" 
-                        [genre]="movie.genre" [filmZoneCategory]="movie.filmZoneCategory" 
-                        [id]="movie.id" [addedToCart]="movie.addedToCart">
+                    <app-card-movie [movie]="movie" (load)="reloadMovies($event)">
                     </app-card-movie>
                 </div>
             </div>

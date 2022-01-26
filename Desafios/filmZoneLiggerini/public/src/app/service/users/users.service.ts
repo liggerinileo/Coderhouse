@@ -27,4 +27,8 @@ export class UsersService extends EntityService {
     return this.http.post(this.getBaseUrl() + '/add', user);
   }
 
+  logout() {
+    localStorage.clear();
+  }
+
 }

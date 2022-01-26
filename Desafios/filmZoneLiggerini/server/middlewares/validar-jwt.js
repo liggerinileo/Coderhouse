@@ -3,17 +3,18 @@ const User = require("../models/User");
 
 
 const validarToken = (req, resp, next) => {
-  const token = req.header("x-token");
-
-  if (!token) {
+  const { authorization } = req.headers;
+  
+  if (!authorization) {
     return resp.status(401).json({
-      ok: false,
-      msg: "No hay token",
+      status: "error",
+      code: 401,
+      message: "No hay token",
     });
   }
 
   try {
-    const { _id, userName } = jwt.verify(token, process.env.SECRET_JWT_SEED);
+    const { _id, userName } = jwt.verify(authorization, "zxgtztst462463262asdgfsd");
     req.id = _id;
     req.name = userName;
     next();

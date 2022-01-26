@@ -7,7 +7,7 @@ const generateJWT = (_id, name) => {
     jwt.sign(
       payLoad,
       "zxgtztst462463262asdgfsd",
-      { expiresIn: "24h" },
+      { expiresIn: "1h" },
       (err, token) => {
         if (err) {
           console.log(err);

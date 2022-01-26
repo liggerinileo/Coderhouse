@@ -34,12 +34,12 @@ export class CartPageComponent implements OnInit {
     this.cartService.getAll().subscribe(movies => {
       if (this.admin) {
         this.cartList = movies;
-        this.cartList.forEach((movie: Cart) => {
+        this.cartList.forEach((movie: any) => {
           this.sumaTotal += movie?.price;
         });
 
       } else {
-        movies.forEach((movie: Cart) => {
+        movies.forEach((movie: any) => {
           if (movie?.client == user?.userName) {
             this.cartList.push(movie);
             this.sumaTotal += movie?.price;

@@ -15,11 +15,11 @@ export class MoviesService extends EntityService {
     return this.http.post(this.getBaseUrl() + "/add", movie);
   }
 
-  editMovie(movie: Movie, id: any): Observable<any> {
+  editMovie(movie: Movie | undefined, id: string | undefined): Observable<any> {
     return this.http.put(this.getBaseUrl() + '/' + id, movie);
   }
 
-  setMovie(movie: any) {
+  setMovie(movie: Movie | undefined) {
     this.movie = movie;
   }
 
@@ -27,7 +27,7 @@ export class MoviesService extends EntityService {
     return this.movie;
   }
 
-  delete(id: any) {
+  delete(id: string | undefined) {
     return this.http.delete(this.getBaseUrl() + '/' + id);
   }
 

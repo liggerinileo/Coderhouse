@@ -19,6 +19,6 @@ router.get("/", getMovies);
 router.get("/:id", getMovie);
 router.put("/:id", [checkValidation, validarToken], updateMovie);
 router.post("/add", validarToken, add);
-router.delete("/:id", deleteMovie);
+router.delete("/:id", validarToken, deleteMovie);
 
 module.exports = router;

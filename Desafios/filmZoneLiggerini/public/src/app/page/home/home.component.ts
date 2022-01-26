@@ -9,7 +9,7 @@ import { UsersService } from "src/app/service/users/users.service";
   templateUrl: "./home.component.html",
   styleUrls: ["./home.component.scss"]
 })
-export class HomeComponent {
+export class HomeComponent{
 
   continuarViendo: Movie[] = [];
   tendencias: Movie[] = [];
@@ -18,15 +18,18 @@ export class HomeComponent {
   admin: boolean = false;
   
   constructor(private moviesService: MoviesService, private router: Router, private userService: UsersService) { 
-    this.load();
-  }
-
-  load() {
     const user = this.userService.getUser();
     if (user.isAdmin) {
       this.admin = true;
     }
-    
+    //this.load();
+  }
+
+  ngAfterContentInit(){
+    this.load();
+  }
+
+  load() {
     this.moviesService.getAll().subscribe(movies => {
       
       this.continuarViendo = movies.filter((movie: any) => movie.filmZoneCategory.includes("continuar-viendo"));
@@ -40,9 +43,18 @@ export class HomeComponent {
     });
   } 
 
+  reloadMovies(event: boolean){
+    if(event) this.load();    
+  }
+
+  toCreate() {
+    this.moviesService.setMovie(undefined);
+    this.router.navigate(["/create"]);
+  }
+
   logout() {
-    localStorage.clear();
-    this.router.navigate(['/home']);
+    this.userService.logout();
+    this.router.navigate(['/']);
   }
 
 }

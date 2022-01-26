@@ -1,11 +1,31 @@
-import { Component, Input } from '@angular/core';
-import { CartService } from "../../service/cart/cart.service";
-import { Movie } from "../../models/Movie";
-import { MoviesService } from 'src/app/service/movies/movies.service';
-import { Router } from '@angular/router';
-import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
-import { UsersService } from 'src/app/service/users/users.service';
-import { Cart } from 'src/app/models/Cart';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output
+} from '@angular/core';
+import {
+  CartService
+} from "../../service/cart/cart.service";
+import {
+  Movie
+} from "../../models/Movie";
+import {
+  MoviesService
+} from 'src/app/service/movies/movies.service';
+import {
+  Router
+} from '@angular/router';
+import {
+  NgbModal,
+  NgbModalOptions
+} from '@ng-bootstrap/ng-bootstrap';
+import {
+  UsersService
+} from 'src/app/service/users/users.service';
+import {
+  Cart
+} from 'src/app/models/Cart';
 
 @Component({
   selector: 'app-card-movie-big',
@@ -13,17 +33,8 @@ import { Cart } from 'src/app/models/Cart';
   styleUrls: ['./card-movie-big.component.scss']
 })
 export class CardMovieBigComponent {
-  @Input() _id: any;
-  @Input() id: any;
-  @Input() image: string = '';
-  @Input() name: string = '';
-  @Input() description: string = '';
-  @Input() duration: string = '';
-  @Input() year: number = 0;
-  @Input() price: number = 0;
-  @Input() genre: string[] = [];
-  @Input() filmZoneCategory: string[] = [];
-  @Input() addedToCart: boolean = false;
+  @Input() movie: Movie | undefined;
+  @Output() load = new EventEmitter<boolean>();
   movieToDelete: any;
   admin: boolean = false;
   addedToC: boolean = false;
@@ -31,86 +42,50 @@ export class CardMovieBigComponent {
 
   constructor(private cartService: CartService, private moviesService: MoviesService,
     private router: Router, private modal: NgbModal, private userService: UsersService) {
-      this.user = this.userService.getUser();
-      if (this.user.isAdmin) {
-        this.admin = true;
-      }
+    this.user = this.userService.getUser();
+    if (this.user.isAdmin) {
+      this.admin = true;
     }
+  }
 
 
-  addToCart(): void {
-    this.moviesService.getAll().subscribe(res => {
-      res?.forEach((r:any) => {
-        if (r?.name == this.name) {
-          this.addedToC = true;
-          
-          let movieCart: Cart = {
-            id: this.id,
-            image: this.image,
-            name: this.name,
-            description: this.description,
-            duration: this.duration,
-            year: this.year,
-            price: this.price,
-            genre: this.genre,
-            filmZoneCategory: this.filmZoneCategory,
-            addedToCart: this.addedToC,
-            returnDate: " ",
-            rented: false,
-            client: this.user.userName
-          }
-
-          this.cartService.addMovie(movieCart).subscribe(res => {
-            this._id = r?._id;
-
-            let movie: Movie = {
-              id: this.id,
-              image: this.image,
-              name: this.name,
-              description: this.description,
-              duration: this.duration,
-              year: this.year,
-              price: this.price,
-              genre: this.genre,
-              filmZoneCategory: this.filmZoneCategory,
-              addedToCart: this.addedToC
-            }
-
-            this.moviesService.editMovie(movie, this._id).subscribe(res => {
-              console.log(res);
-        
-            }, error => {
-              console.log(error);
-        
-            });
-      
-          }, error => {
-            console.log(error);
-      
-          });
-        }
+  addToCart(): void {    
+    this.addedToC = true;
+    this.movie ? this.movie.addedToCart = this.addedToC : undefined;
+    let movieCart: Cart = {
+      name: this.movie?.name ,
+      image: this.movie?.image,
+      description: this.movie?.description,
+      duration: this.movie?.duration,
+      year: this.movie?.year,
+      price: this.movie?.price,
+      genre: this.movie?.genre,
+      filmZoneCategory: this.movie?.filmZoneCategory,
+      addedToCart: this.movie?.addedToCart,
+      id: this.movie?.id,
+      returnDate: " ",
+      rented: false,
+      client: this.user.userName
+    };
+    
+    this.cartService.addMovie(movieCart).subscribe(res => {
+      console.log(res);
+      this.moviesService.editMovie(this.movie, this.movie?._id).subscribe(res => {
+        console.log(res);
+  
+      }, error => {
+        console.log(error);
+  
       });
 
     }, error => {
       console.log(error);
-      alert(error?.error?.message);
 
     });
   }
 
   openModal(content: any) {
-    let movie = {
-      image: this.image,
-      name: this.name,
-      description: this.description,
-      duration: this.duration,
-      year: this.year,
-      price: this.price,
-      genre: this.genre,
-      filmZoneCategory: this.filmZoneCategory
-    }
-
-    this.moviesService.setMovie(movie);
+    this.moviesService.setMovie(this.movie);
 
     let options: NgbModalOptions = {
       centered: true,
@@ -125,42 +100,17 @@ export class CardMovieBigComponent {
   }
 
   edit() {
-    let movie = {
-      image: this.image,
-      name: this.name,
-      description: this.description,
-      duration: this.duration,
-      year: this.year,
-      price: this.price,
-      genre: this.genre,
-      filmZoneCategory: this.filmZoneCategory
-    }
-
-    this.moviesService.setMovie(movie);
+    this.moviesService.setMovie(this.movie);
     this.router.navigate(['/create']);
   }
 
   delete() {
-    let movie = this.moviesService.getMovie();
-    this.moviesService.getAll().subscribe(res => {
-      res?.forEach((r:any) => {
-        if (r?.name == movie.name) {
-          this.movieToDelete = r;
-          if (this.movieToDelete != undefined) {
-            this.moviesService.delete(this.movieToDelete?._id).subscribe(res => {
-              this.modal.dismissAll();
-              this.router.navigate(['/home']);
-              
-            }, error => {
-              this.modal.dismissAll();
-              alert(error?.error?.message);
-      
-            });
-          }
-        }
-      });
+    this.moviesService.delete(this.movie?._id).subscribe(res => {
+      this.modal.dismissAll();
+      this.load.emit(true);
+
     }, error => {
-      console.log(error);
+      this.modal.dismissAll();
       alert(error?.error?.message);
 
     });

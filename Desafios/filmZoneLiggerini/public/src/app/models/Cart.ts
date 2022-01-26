@@ -1,15 +1,15 @@
 export interface Cart {
-    name: string;
-    image: string;
-    description: string,
-    duration: string,
-    year: number,
-    price: number,
-    genre: string[],
-    filmZoneCategory: string[],
-    addedToCart: boolean,
-    id: number;
+    name: string | undefined,
+    image: string | undefined,
+    description: string | undefined,
+    duration: string | undefined,
+    year: number | undefined,
+    price: number | undefined,
+    genre: string[] | undefined,
+    filmZoneCategory: string[] | undefined,
+    addedToCart: boolean | undefined,
+    id: number | undefined,
     returnDate?: string,
-    rented?: boolean;
-    client?: string;
+    rented?: boolean,
+    client?: string,
 }

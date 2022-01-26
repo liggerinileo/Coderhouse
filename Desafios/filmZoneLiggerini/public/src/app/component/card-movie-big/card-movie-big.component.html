@@ -1,7 +1,7 @@
 <div class="cardd">
-    <h1 class="titulo">{{ this.name }}</h1>
+    <h1 class="titulo">{{ this.movie?.name }}</h1>
     
-    <img [src]="this.image">
+    <img [src]="this.movie?.image">
     
     <div class="links">
         <a *ngIf="!addedToC" class="cart" mat-mini-fab color="basic" (click)="addToCart()">

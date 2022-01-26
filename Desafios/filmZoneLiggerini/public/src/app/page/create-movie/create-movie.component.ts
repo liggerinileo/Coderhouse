@@ -156,15 +156,20 @@ export class CreateMovieComponent implements OnInit{
           price: this.uploadMovieForm?.value?.price,
           genre: generos,
           filmZoneCategory: categorias,
-          addedToCart: false
+          addedToCart: false,
         }
         this.moviesService.createMovie(movie).subscribe(res => {
           console.log(res);
           this.volver();
   
         }, error => {
-          console.log(error);
-          alert(error?.error?.message)
+          if(error == "Token invalido" || error == "No hay token") {
+            alert("Ha expirado el tiempo de sesión");
+  
+          } else {
+            alert(error?.error?.message);
+  
+          }
         });
       }, error => {
         console.log(error);
@@ -189,7 +194,13 @@ export class CreateMovieComponent implements OnInit{
 
       }, error => {
         console.log(error);
-        alert(error?.error?.message)
+        if(error == "Token invalido" || error == "No hay token") {
+          alert("Ha expirado el tiempo de sesión");
+
+        } else {
+          alert(error?.error?.message);
+
+        }
       });
     }
   }
