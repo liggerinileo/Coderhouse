@@ -43,7 +43,7 @@ export class CardMovieBigComponent {
   constructor(private cartService: CartService, private moviesService: MoviesService,
     private router: Router, private modal: NgbModal, private userService: UsersService) {
     this.user = this.userService.getUser();
-    if (this.user.isAdmin) {
+    if (this.user?.isAdmin) {
       this.admin = true;
     }
   }

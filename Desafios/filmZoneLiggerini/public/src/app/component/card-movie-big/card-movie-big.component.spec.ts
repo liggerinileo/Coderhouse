@@ -1,4 +1,7 @@
+import { HttpClient, HttpHandler } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterModule } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { CardMovieBigComponent } from './card-movie-big.component';
 
@@ -8,6 +11,14 @@ describe('CardMovieBigComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [ 
+        RouterTestingModule.withRoutes([]),
+        RouterModule
+      ],
+      providers: [
+        HttpClient,
+        HttpHandler
+      ],
       declarations: [ CardMovieBigComponent ]
     })
     .compileComponents();

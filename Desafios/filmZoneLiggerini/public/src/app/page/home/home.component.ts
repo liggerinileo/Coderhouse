@@ -19,10 +19,9 @@ export class HomeComponent{
   
   constructor(private moviesService: MoviesService, private router: Router, private userService: UsersService) { 
     const user = this.userService.getUser();
-    if (user.isAdmin) {
+    if (user?.isAdmin) {
       this.admin = true;
     }
-    //this.load();
   }
 
   ngAfterContentInit(){

@@ -18,12 +18,10 @@ export abstract class EntityService {
 
   public getAll(): Observable<any> {
     return this.http.get(this.getBaseUrl());
-
   }
 
   public get(id: number): Observable<any> {
     return this.http.get(this.getBaseUrl() + '/' + id);
-  
   }
 
 }
