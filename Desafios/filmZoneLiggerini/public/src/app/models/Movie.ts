@@ -1,7 +1,7 @@
 export interface Movie {
-    _id?: string;
-    name: string;
-    image: string;
+    _id?: string,
+    name: string,
+    image: string,
     description: string,
     duration: string,
     year: number,
@@ -9,5 +9,5 @@ export interface Movie {
     genre: string[],
     filmZoneCategory: string[],
     addedToCart: boolean,
-    id: number;
+    id: number,
 }

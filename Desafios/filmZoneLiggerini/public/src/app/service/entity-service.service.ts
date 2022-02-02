@@ -20,7 +20,7 @@ export abstract class EntityService {
     return this.http.get(this.getBaseUrl());
   }
 
-  public get(id: number): Observable<any> {
+  public get(id: any): Observable<any> {
     return this.http.get(this.getBaseUrl() + '/' + id);
   }
 

@@ -87,4 +87,4 @@ const login = async (req, res = response) => {
     }
 };
 
-module.exports = { getUsers, createUser, login };
+module.exports = { getUsers, createUser, login, getUsers };
