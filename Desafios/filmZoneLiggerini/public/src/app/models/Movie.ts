@@ -10,4 +10,7 @@ export interface Movie {
     filmZoneCategory: string[],
     addedToCart: boolean,
     id: number,
+    returnDate?: string,
+    rented?: boolean,
+    client?: string,
 }

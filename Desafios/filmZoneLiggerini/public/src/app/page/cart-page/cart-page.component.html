@@ -21,7 +21,7 @@
                     <div class="movie-price">
                         <p>{{movie?.price | currency}}</p>
                     </div>
-                    <div class="movie-client">
+                    <div *ngIf="this.admin" class="movie-client">
                         <p>
                             <span style="font-weight: 500; font-size: 15px;">Usuario: </span>
                             &nbsp; {{movie?.client}}

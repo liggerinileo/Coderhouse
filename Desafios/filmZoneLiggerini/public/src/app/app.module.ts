@@ -27,6 +27,8 @@ import { CreateMovieComponent } from './page/create-movie/create-movie.component
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { XhrInterceptor } from './interceptors/xhr.interceptor';
 
+import { movieStoreProviders } from "./store/stores/movie.store";
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -58,7 +60,12 @@ import { XhrInterceptor } from './interceptors/xhr.interceptor';
     NgbModule      
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: XhrInterceptor, multi: true }
+    { 
+      provide: HTTP_INTERCEPTORS, 
+      useClass: XhrInterceptor, 
+      multi: true
+    },
+    movieStoreProviders
   ],
   bootstrap: [AppComponent]
 })

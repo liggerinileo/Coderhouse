@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, Output } from '@angular/core';
 import { MoviesService } from 'src/app/service/movies/movies.service';
 import { CartService } from "../../service/cart/cart.service";
 import { Router } from '@angular/router';
@@ -7,6 +7,10 @@ import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { UsersService } from 'src/app/service/users/users.service';
 import { Cart } from 'src/app/models/Cart';
 import { Movie } from 'src/app/models/Movie';
+import { addedtocart } from "../../store/actions/cart.actions";
+import { MovieState } from "../../store/states/movie.state";
+import { MovieStore } from "../../store/stores/movie.store";
+import { Store } from 'redux';
 
 @Component({
   selector: 'app-card-movie',
@@ -21,15 +25,26 @@ export class CardMovieComponent {
   movieToDelete: any;
   admin: boolean = false;
   user: any;
+  stateAddedToCart: any;
 
   constructor(private cartService: CartService, private moviesService: MoviesService, 
-    private router: Router, private modal: NgbModal, private userService: UsersService) {
+            private router: Router, private modal: NgbModal, private userService: UsersService,
+            @Inject(MovieStore) private store: Store<MovieState>) {
       this.user = this.userService.getUser();
       if (this.user?.isAdmin) {
         this.admin = true;
       }
-    }
+      this.readState();
+      store.subscribe(() => {
+        this.readState();
+      })
+  }
 
+  readState() {
+    const state: MovieState = this.store.getState();
+    this.stateAddedToCart = state.addedToCart;
+    console.log(this.stateAddedToCart);
+  }
 
   addToCart(): void {    
     this.addedToC = true;
@@ -52,6 +67,7 @@ export class CardMovieComponent {
     
     this.cartService.addMovie(movieCart).subscribe(res => {
       console.log(res);
+      this.store.dispatch<any>(addedtocart(true));
       this.moviesService.editMovie(this.movie, this.movie?._id).subscribe(res => {
         console.log(res);
   
@@ -62,7 +78,7 @@ export class CardMovieComponent {
 
     }, error => {
       console.log(error);
-
+      this.addedToC = false;
     });
   }
 

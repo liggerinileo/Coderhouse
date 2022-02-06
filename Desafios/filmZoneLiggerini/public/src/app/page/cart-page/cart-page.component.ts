@@ -1,11 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { CartService } from "../../service/cart/cart.service";
-import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { UsersService } from 'src/app/service/users/users.service';
-import { Cart } from 'src/app/models/Cart';
 import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { MoviesService } from 'src/app/service/movies/movies.service';
+import { addedtocart } from "../../store/actions/cart.actions";
+import { MovieState } from "../../store/states/movie.state";
+import { MovieStore } from "../../store/stores/movie.store";
+import { Store } from 'redux';
 
 @Component({
   selector: 'app-cart-page',
@@ -18,12 +20,25 @@ export class CartPageComponent implements OnInit {
   admin: boolean = false;
   sumaTotal: number = 0;
   id: number = -1;
+  stateAddedToCart: any;
 
   constructor(private router: Router, private cartService: CartService, 
-    private userService: UsersService, private moviesService: MoviesService, private modal: NgbModal) {}
+    private userService: UsersService, private moviesService: MoviesService, private modal: NgbModal,
+    @Inject(MovieStore) private store: Store<MovieState>) {
+      this.readState();
+      store.subscribe(() => {
+        this.readState();
+      })
+  }
 
   ngOnInit(): void {
     this.load();
+  }
+
+  readState() {
+    const state: MovieState = this.store.getState();
+    this.stateAddedToCart = state.addedToCart;
+    console.log(this.stateAddedToCart);
   }
 
   load(): void {
@@ -56,6 +71,7 @@ export class CartPageComponent implements OnInit {
     this.cartService.deleteMovie(this.id).subscribe(res => {
       this.sumaTotal -= this.sumaTotal;
       this.dismiss();
+      this.store.dispatch<any>(addedtocart(false));
       this.load();
 
     }, error => {

@@ -22,8 +22,11 @@
     "@angular/platform-browser-dynamic": "~12.2.0",
     "@angular/router": "~12.2.0",
     "@ng-bootstrap/ng-bootstrap": "^10.0.0",
+    "@ngrx/data": "^12.5.1",
+    "@ngrx/store-devtools": "^12.5.1",
     "bootstrap": "^4.5.0",
     "ng-modal": "^1.0.2",
+    "redux": "^4.1.2",
     "rxjs": "~6.6.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
