@@ -4,21 +4,22 @@
     <img [src]="this.movie?.image">
 
     <div class="links">
-        <a *ngIf="!this.movie?.addedToCart" class="cart" mat-mini-fab color="basic" (click)="addToCart()">
+        <a *ngIf="!this.movie?.addedToCart" class="cart" mat-mini-fab color="basic" (click)="addToCart()" 
+            matTooltip="Agregar a carrito">
             <mat-icon>add_shopping_cart</mat-icon>
         </a>
     
-        <a *ngIf="this.movie?.addedToCart" class="cart" mat-mini-fab color="warn">
+        <a *ngIf="this.movie?.addedToCart" class="cart" mat-mini-fab color="warn" matTooltip="Agregada a carrito">
             <mat-icon>done_outline</mat-icon>
         </a>    
     </div>
     <a mat-mini-fab color="basic" class="edit" (click)="openModal(more)" matTooltip="Más Información">
         <mat-icon>add</mat-icon>
     </a>
-    <a *ngIf="admin" mat-mini-fab color="basic" class="edit" (click)="edit()">
+    <a *ngIf="admin" mat-mini-fab color="basic" class="edit" (click)="edit()" matTooltip="Editar">
         <mat-icon>edit</mat-icon>
     </a>
-    <a *ngIf="admin" mat-mini-fab color="warn" class="delete" (click)="openModal(eliminar)">
+    <a *ngIf="admin" mat-mini-fab color="warn" class="delete" (click)="openModal(eliminar)" matTooltip="Eliminar">
         <mat-icon>delete</mat-icon>
     </a>
 </div>
