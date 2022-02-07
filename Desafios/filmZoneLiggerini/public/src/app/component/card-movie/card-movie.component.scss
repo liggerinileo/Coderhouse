@@ -64,3 +64,37 @@
     font-size: 20px;
     color: rgb(109, 70, 136);
 }
+
+.modal-more {
+    font-weight: 400;
+    font-size: 18px;
+    color: white;
+}
+
+.modal-title-movie {
+    font-weight: 700;
+    font-size: 20px;
+    color: white;
+    margin-left: 15px;
+    margin-top: 12px;
+}
+
+.modal-title-more {
+    font-weight: 700;
+    font-size: 20px;
+    color: white;
+}
+
+.modal-more {
+    background-color: rgba(109, 70, 136, 0.5);
+    border-bottom-left-radius: 5%;
+    border-bottom-right-radius: 5%;
+}
+
+.modal-title-mov {
+    text-align: center;
+}
+
+.modal-body, .modal-footer, .modal-title-more, .modal-more, .modal-title {
+    background-color: rgba(109, 70, 136, 0.9);
+}

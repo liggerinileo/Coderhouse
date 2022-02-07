@@ -21,7 +21,6 @@ export class CardMovieComponent {
 
   @Input() movie: Movie | undefined;
   @Output() load = new EventEmitter<boolean>();
-  addedToC: boolean = false;
   movieToDelete: any;
   admin: boolean = false;
   user: any;
@@ -47,8 +46,7 @@ export class CardMovieComponent {
   }
 
   addToCart(): void {    
-    this.addedToC = true;
-    this.movie ? this.movie.addedToCart = this.addedToC : undefined;
+    this.movie ? this.movie.addedToCart = true : undefined;
     let movieCart: Cart = {
       name: this.movie?.name ,
       image: this.movie?.image,
@@ -78,7 +76,8 @@ export class CardMovieComponent {
 
     }, error => {
       console.log(error);
-      this.addedToC = false;
+      this.movie ? this.movie.addedToCart = false : undefined;
+
     });
   }
 

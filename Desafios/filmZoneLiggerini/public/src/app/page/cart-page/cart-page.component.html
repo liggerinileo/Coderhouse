@@ -28,6 +28,15 @@
                         </p>
                     </div>
                     <div class="movie-delete">
+                        <a *ngIf="!movie?.rented && this.user.userName == movie?.client" 
+                            mat-fab color="basic" (click)="openModalRent(alquilar, movie)">
+                            <mat-icon>shop</mat-icon>
+                        </a>
+                        <p *ngIf="movie?.rented && this.user.userName == movie?.client">
+                            <span style="font-weight: 500; font-size: 15px;">Alquilada</span>
+                        </p>
+                    </div>
+                    <div class="movie-delete">
                         <a mat-fab color="warn" (click)="openModal(eliminar, movie?._id)">
                             <mat-icon>delete</mat-icon>
                         </a>
@@ -52,6 +61,16 @@
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-danger" (click)="delete()">Confirmar</button>
+        <button type="button" class="btn btn-outline-primary" (click)="dismiss()">Cancelar</button>
+    </div>
+</ng-template>
+
+<ng-template #alquilar let-modal>
+    <div class="modal-body">
+        <p class="modal-title" id="modal-basic-title">¿Quiere alquilar esta pelicula?</p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="rent()">Confirmar</button>
         <button type="button" class="btn btn-outline-primary" (click)="dismiss()">Cancelar</button>
     </div>
 </ng-template>

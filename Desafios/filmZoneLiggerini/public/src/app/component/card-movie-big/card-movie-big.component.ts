@@ -50,8 +50,7 @@ export class CardMovieBigComponent {
 
 
   addToCart(): void {    
-    this.addedToC = true;
-    this.movie ? this.movie.addedToCart = this.addedToC : undefined;
+    this.movie ? this.movie.addedToCart = true : undefined;
     let movieCart: Cart = {
       name: this.movie?.name ,
       image: this.movie?.image,
@@ -80,7 +79,8 @@ export class CardMovieBigComponent {
 
     }, error => {
       console.log(error);
-
+      this.movie ? this.movie.addedToCart = false : undefined;
+      
     });
   }
 

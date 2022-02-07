@@ -4,14 +4,17 @@
     <img [src]="this.movie?.image">
 
     <div class="links">
-        <a *ngIf="!addedToC" class="cart" mat-mini-fab color="basic" (click)="addToCart()">
+        <a *ngIf="!this.movie?.addedToCart" class="cart" mat-mini-fab color="basic" (click)="addToCart()">
             <mat-icon>add_shopping_cart</mat-icon>
         </a>
     
-        <a *ngIf="addedToC" class="cart" mat-mini-fab color="primary">
+        <a *ngIf="this.movie?.addedToCart" class="cart" mat-mini-fab color="warn">
             <mat-icon>done_outline</mat-icon>
         </a>    
     </div>
+    <a mat-mini-fab color="basic" class="edit" (click)="openModal(more)" matTooltip="Más Información">
+        <mat-icon>add</mat-icon>
+    </a>
     <a *ngIf="admin" mat-mini-fab color="basic" class="edit" (click)="edit()">
         <mat-icon>edit</mat-icon>
     </a>
@@ -27,5 +30,20 @@
     <div class="modal-footer">
         <button type="button" class="btn btn-danger" (click)="delete()">Confirmar</button>
         <button type="button" class="btn btn-outline-primary" (click)="dismiss()">Cancelar</button>
+    </div>
+</ng-template>
+
+<ng-template #more let-modal>
+    <div class="modal-more">
+        <div class="modal-title-mov">
+            <p class="modal-title-movie" id="modal-basic-title">{{this.movie?.name}}</p>
+        </div>
+        <div class="modal-body">
+            <p class="modal-title-more" id="modal-basic-title">Sinopsis</p>
+            <p class="modal-more" id="modal-basic-title">{{this.movie?.description}}</p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-light" (click)="dismiss()">Volver</button>
+        </div>
     </div>
 </ng-template>
