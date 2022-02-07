@@ -20,6 +20,35 @@ const getUsers = async (req, res = response) => {
     })
 };
 
+const getUser = async (req, res = response) => {
+  const _id = req.params.id;
+
+  try {
+    User.findById(_id, function (err, user) {
+      if (err){
+        res.status(404).json({
+          message: "No se encontró el usuario",
+          status: "error",
+          code: 404
+    
+        })
+      } else{
+        res.json({
+          user,
+
+        });
+      }
+  });
+  } catch (err) {
+    res.status(400).json({
+      message: "Ocurrio un error en la base de datos",
+      status: "error",
+      code: 400
+
+    })
+  }
+};
+
 const createUser = async (req, res = response) => {
     const { email, userName, password, isAdmin } = req.body;
 
@@ -44,6 +73,47 @@ const createUser = async (req, res = response) => {
           
     });
     
+};
+
+const updateUser = async (req, res = response) => {
+  const _id = req.params.id;
+  const { estado, ...body } = req.body;
+
+  try {
+    User.findById(_id, function (err, user) {
+      if (err){
+        res.status(404).json({
+          message: "No se encontró al usuario",
+          status: "error",
+          code: 404
+    
+        })
+      } else{
+        res.json({
+          user,
+
+        });
+      }
+    });
+
+    const userUpdated = await User.findByIdAndUpdate(_id, body, {
+      new: true,
+    });
+
+    res.json({
+      status: "OK",
+      movie: userUpdated,
+      code: 200
+
+    });
+  } catch (err) {
+    res.status(400).json({
+      message: "Ocurrio un error",
+      status: "error",
+      code: 400
+
+    })
+  }
 };
 
 const login = async (req, res = response) => {
@@ -87,4 +157,28 @@ const login = async (req, res = response) => {
     }
 };
 
-module.exports = { getUsers, createUser, login, getUsers };
+const deleteUser = async (req, res = response) => {
+  const _id = req.params.id;
+  try {
+    const user = await User.findById(_id);
+
+    await User.findByIdAndDelete(_id);
+    res.status(202).json({
+      message: "Se borró correctamente",
+      status: "OK",
+      code: 202, 
+      user
+
+    })
+
+  } catch (error) {
+    res.status(400).json({
+      message: "Ocurrio un error",
+      status: "error",
+      code: 400
+
+    })
+  }
+};
+
+module.exports = { getUsers, createUser, login, getUsers, getUser, deleteUser, updateUser };

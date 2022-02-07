@@ -1,0 +1,61 @@
+<div class="list">
+    <div class="imagen-header">
+        <a [routerLink]="['/home']">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/4/4c/The_Film_Zone_logo.PNG" alt="">
+        </a>
+    </div>
+    <div class="lista">
+        <div class="titulo-lista">
+            <h1>Lista de usuarios</h1>
+        </div>
+        <div class="listado">
+            <table class="table">
+                <thead>
+                  <tr class="text-center">
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">¿Es admin?</th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let user of userList" class="text-center">
+                    <td>{{user?.userName}}</td>
+                    <td>{{user?.email}}</td>
+                    <td *ngIf="user?.isAdmin"><mat-icon>check_circle_outline</mat-icon></td>
+                    <td *ngIf="!user?.isAdmin"><mat-icon>highlight_off</mat-icon></td>
+                    <td class="user-delete">
+                        <a mat-mini-fab color="warn" matTooltip="Delete" class="delete"
+                            (click)="openModal(eliminar, user?._id)">
+                            <mat-icon>delete</mat-icon>
+                        </a>
+                        <a *ngIf="!user?.isAdmin" mat-mini-fab color="primary" matTooltip="Dar permisos de admin" 
+                            (click)="makeOrTakeAdmin(user, user?._id, true)">
+                            <mat-icon>bubble_chart</mat-icon>
+                        </a>
+                        <a *ngIf="user?.isAdmin" mat-mini-fab color="warn" matTooltip="Quitar permisos de admin" 
+                            (click)="makeOrTakeAdmin(user, user?._id, false)">
+                            <mat-icon>bubble_chart</mat-icon>
+                        </a>
+                    </td>
+                  </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div style="margin-top: 4%; display: flex; justify-content: center; padding-bottom: 14%;">
+        <a mat-raised-button color="warn" [routerLink]="['/home']" style="width: 150px;">
+            Volver
+        </a>  
+    </div>
+</div>
+
+<ng-template #eliminar let-modal>
+    <div class="modal-body">
+        <p class="modal-title" id="modal-basic-title">¿Quiere eliminar este usuario?</p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="delete()">Confirmar</button>
+        <button type="button" class="btn btn-outline-primary" (click)="dismiss()">Cancelar</button>
+    </div>
+</ng-template>

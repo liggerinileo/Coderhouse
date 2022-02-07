@@ -27,8 +27,16 @@ export class UsersService extends EntityService {
     return this.http.post(this.getBaseUrl() + '/add', user);
   }
 
+  edit(user: User | undefined, id: string | undefined): Observable<any> {
+    return this.http.put(this.getBaseUrl() + '/' + id, user);
+  }
+
   logout() {
     localStorage.clear();
+  }
+
+  delete(id: string | undefined) {
+    return this.http.delete(this.getBaseUrl() + '/' + id);
   }
 
 }

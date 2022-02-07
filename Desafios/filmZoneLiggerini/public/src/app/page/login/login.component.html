@@ -14,10 +14,10 @@
             <mat-form-field appearance="outline">
                 <mat-label>password</mat-label>
                 <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
-                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" 
-                    [attr.aria-pressed]="hide" class="btn-visible">
+                <a mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" 
+                    [attr.aria-pressed]="hide" class="btn-visible hide">
                   <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                </button>
+                </a>
             </mat-form-field>
             
             <div style="display: flex; justify-content: center; text-align: left;">

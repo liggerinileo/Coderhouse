@@ -12,6 +12,9 @@
         <a *ngIf="admin" mat-fab color="basic" (click)="toCreate()" matTooltip="AGREGAR PELICULA" class="carrito">
             <mat-icon>cloud_upload</mat-icon>
         </a>
+        <a *ngIf="admin" mat-fab color="basic" [routerLink]="['/users']" matTooltip="LISTA USUARIOS" class="carrito">
+            <mat-icon>list</mat-icon>
+        </a>
     </div>
     <div class="lista">
         <div>

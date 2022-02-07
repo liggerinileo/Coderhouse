@@ -1,0 +1,75 @@
+.list {
+    background: rgb(137,82,189);
+    background: linear-gradient(360deg, rgba(137,82,189,1) 0%, rgba(41,10,61,1) 100%);
+}
+
+.imagen-header img {
+    width: 150px;
+    padding-top: 15px;
+    padding-left: 15px;
+}
+
+.titulo-lista h1 {
+    text-align: center;
+    color: white;
+    font-size: 35px;
+    font-weight: 500;
+}
+
+.titulo-total {
+    margin-top: 5%;
+}
+
+.titulo-total h3 {
+    text-align: center;
+    color: white;
+    font-size: 25px;
+    font-weight: 400;
+}
+
+.listado {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 75px;
+    
+}
+
+.listado table {
+    width: 80%;
+    color: white;
+}
+
+.listado table, .listado table tr {
+    border-bottom: 1px solid rgb(65, 27, 78);
+    border-top: 1px solid rgb(65, 27, 78);
+}
+
+.listado table th {
+    border-bottom: 1px solid rgb(65, 27, 78);
+    border-top: 2px solid rgb(65, 27, 78);
+}
+
+tr td, tr td mat-icon {
+    vertical-align: middle;
+}
+
+tr th {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.user-delete {
+    display: flex;
+    justify-content: center;
+    padding-left: 25px;
+    padding-right: 25px;
+    border: none;
+    margin-left: 25px;
+    width: 90px;
+}
+
+.user-delete .delete {
+    margin-right: 30px;
+}
+

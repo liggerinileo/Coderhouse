@@ -28,6 +28,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { XhrInterceptor } from './interceptors/xhr.interceptor';
 
 import { movieStoreProviders } from "./store/stores/movie.store";
+import { UsersComponent } from './page/users/users.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { movieStoreProviders } from "./store/stores/movie.store";
     CardMovieComponent,
     CartPageComponent,
     CardMovieBigComponent,
-    CreateMovieComponent
+    CreateMovieComponent,
+    UsersComponent
   ],
   imports: [
     BrowserModule,
