@@ -35,9 +35,24 @@
     
 }
 
-.listado ul {
-    width: 80%;
+.listado ul, .listado ul li {
+    width: 90%;
 
+}
+
+.movie-rented, .movie-not-rented, .movie-to-rent {
+    width: 300px;
+}
+
+.movie-rented p {
+    font-weight: 500; 
+    font-size: 17px;
+}
+
+.movie-rented {
+    display: flex;
+    justify-content: center;
+    vertical-align: middle;
 }
 
 .listado ul li {
@@ -68,22 +83,33 @@
 }
 
 .movie-title {
-    width: 320px;
+    width: 350px;
 }
 
-.movie-duration, .movie-price,  .movie-title, .movie-delete, .movie-client{
+.movie-duration, .movie-price,  .movie-title, .movie-delete, .movie-client, .movie-to-rent, .movie-return{
     display: flex;
     justify-content: center;
     padding-left: 25px;
     padding-right: 25px;
 }
 
-.movie-delete {
+.movie-to-rent a {
+    padding-top: 10px;
+}
+
+.movie-delete, .movie-return {
     padding-top: 12px;
+}
+
+.movie-return {
+    margin-left: 22px;
+}
+
+.movie-delete {
     margin-left: 25px;
 }
 
-.movie-duration, .movie-price, .movie-delete{
-    width: 110px;
+.movie-duration, .movie-price, .movie-delete, .movie-return{
+    width: 150px;
 }
 

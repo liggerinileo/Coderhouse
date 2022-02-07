@@ -82,7 +82,7 @@ const updateMovie = async (req, res = response) => {
     const _id = req.params.id;
     const { estado, ...body } = req.body;
   
-    try {
+    
         Cart.findById(_id, function (err, movie) {
             if (err){
                 res.status(404).json({
@@ -109,14 +109,7 @@ const updateMovie = async (req, res = response) => {
             code: 200
   
         });
-    } catch (err) {
-        res.status(400).json({
-            message: "Ocurrio un error",
-            status: "error",
-            code: 400
-  
-        })
-    }
+    
 };
 
 module.exports = { getMovies, updateMovie, deleteMovie, add };

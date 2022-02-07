@@ -15,9 +15,6 @@
                     <div class="movie-title">
                         <h2>{{movie?.name}}</h2>
                     </div>
-                    <div class="movie-duration">
-                        <p>{{movie?.duration}}</p>
-                    </div>
                     <div class="movie-price">
                         <p>{{movie?.price | currency}}</p>
                     </div>
@@ -27,20 +24,30 @@
                             &nbsp; {{movie?.client}}
                         </p>
                     </div>
-                    <div class="movie-delete">
-                        <a *ngIf="!movie?.rented && this.user.userName == movie?.client" 
-                            mat-fab color="basic" (click)="openModalRent(alquilar, movie)">
+                    <div *ngIf="!movie?.rented && this.user.userName == movie?.client" class="movie-to-rent">
+                        <a  mat-fab color="basic" matTooltip="Alquilar pelicula"
+                            (click)="openModalRent(alquilar, movie)">
                             <mat-icon>shop</mat-icon>
                         </a>
-                        <p *ngIf="movie?.rented && this.user.userName == movie?.client">
-                            <span style="font-weight: 500; font-size: 15px;">Alquilada</span>
-                        </p>
                     </div>
-                    <div class="movie-delete">
+                    <div *ngIf="movie?.rented && this.user.userName == movie?.client" class="movie-rented">
+                        <p>Alquilada</p>
+                    </div>
+                    <div *ngIf="this.user.userName != movie?.client" class="movie-not-rented">
+                    </div>
+                    <div *ngIf="!movie?.rented; else return" class="movie-delete">
                         <a mat-fab color="warn" (click)="openModal(eliminar, movie?._id)">
                             <mat-icon>delete</mat-icon>
                         </a>
                     </div>
+                    <ng-template #return>
+                        <div class="movie-return">
+                            <a mat-fab color="primary" matTooltip="Devolver pelicula"
+                                    (click)="openModalRent(devolver, movie)">
+                                <mat-icon>bubble_chart</mat-icon>
+                            </a>
+                        </div>
+                    </ng-template>
                 </li>
             </ul>
         </div>
@@ -71,6 +78,16 @@
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-danger" (click)="rent()">Confirmar</button>
+        <button type="button" class="btn btn-outline-primary" (click)="dismiss()">Cancelar</button>
+    </div>
+</ng-template>
+
+<ng-template #devolver let-modal>
+    <div class="modal-body">
+        <p class="modal-title" id="modal-basic-title">¿Quiere devolver esta pelicula?</p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="returnMovie()">Confirmar</button>
         <button type="button" class="btn btn-outline-primary" (click)="dismiss()">Cancelar</button>
     </div>
 </ng-template>

@@ -24,6 +24,7 @@ export class CartPageComponent implements OnInit {
   stateAddedToCart: any;
   user: any;
   movie: any;
+  today: any;
 
   constructor(private router: Router, private cartService: CartService, 
     private userService: UsersService, private moviesService: MoviesService, private modal: NgbModal,
@@ -32,10 +33,11 @@ export class CartPageComponent implements OnInit {
       store.subscribe(() => {
         this.readState();
       })
+      this.today = new Date().getDate();
   }
 
   ngOnInit(): void {
-    this.load();
+    this.load(false);
   }
 
   readState() {
@@ -44,31 +46,37 @@ export class CartPageComponent implements OnInit {
     console.log(this.stateAddedToCart);
   }
 
-  load(): void {
+  load(alquilar: boolean): void {
     this.user = this.userService.getUser();
     if (this.user?.isAdmin) {
       this.admin = true;
     }
     let today = new Date().toDateString();
     this.cartService.getAll().subscribe(movies => {
+      debugger;
       movies.forEach((m: any) => {
-        if (m.returnDate == today) {
-          m.returnDate = " ";
-          m.rented = false;
-          this.editMovie(m, m?._id);
+        if (m.rented) {
+          if (m.returnDate == today) {
+            m.returnDate = " ";
+            m.rented = false;
+            this.editMovie(m, m?._id);
+          }
         }
       });
       if (this.admin) {
         this.cartList = movies;
-        this.cartList.forEach((movie: any) => {
-          this.sumaTotal += movie?.price;
-        });
-
+        if (!alquilar) {
+          this.cartList.forEach((movie: any) => {
+            this.sumaTotal += movie?.price;
+          });
+        }
       } else {
         movies.forEach((movie: any) => {
           if (movie?.client == this.user?.userName) {
             this.cartList.push(movie);
-            this.sumaTotal += movie?.price;
+            if (!alquilar) {
+              this.sumaTotal += movie?.price;
+            }
           }
         });
       }
@@ -76,6 +84,24 @@ export class CartPageComponent implements OnInit {
       console.log(error);
 
     });
+  }
+
+  returnMovie() {
+    let m: Movie = {
+      id: this.movie?.id,
+      name: this.movie.name,
+      year: this.movie.year,
+      image: this.movie.image,
+      duration: this.movie.duration,
+      description: this.movie.description,
+      price: this.movie.price,
+      genre: this.movie.genre,
+      filmZoneCategory: this.movie.filmZoneCategory,
+      addedToCart: this.movie.addedToCart,
+      rented: false,
+      returnDate: " "
+    }
+    this.editMovie(m, this.movie?._id);
   }
 
   rent() {
@@ -101,7 +127,7 @@ export class CartPageComponent implements OnInit {
   editMovie(movie: Movie, movieId: string) {
     this.cartService.editMovie(movie, movieId).subscribe(res => {
       console.log(res);
-      this.load();
+      this.load(true);
       this.dismiss();
 
     }, error => {
@@ -121,7 +147,7 @@ export class CartPageComponent implements OnInit {
       this.sumaTotal -= this.sumaTotal;
       this.dismiss();
       this.store.dispatch<any>(addedtocart(false));
-      this.load();
+      this.load(false);
 
     }, error => {
       console.log(error);
