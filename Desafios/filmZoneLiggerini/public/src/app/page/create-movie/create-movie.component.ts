@@ -18,7 +18,7 @@ export class CreateMovieComponent implements OnInit{
   editar = false;
 
   constructor(private fb: FormBuilder, private router: Router, private moviesService: MoviesService) {
-    this.movie = this.moviesService.getMovie();
+    this.movie = moviesService.getMovie();
   }
 
   ngOnInit(): void {

@@ -29,6 +29,7 @@ import { XhrInterceptor } from './interceptors/xhr.interceptor';
 
 import { movieStoreProviders } from "./store/stores/movie.store";
 import { UsersComponent } from './page/users/users.component';
+import { UserComponent } from './page/user/user.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { UsersComponent } from './page/users/users.component';
     CartPageComponent,
     CardMovieBigComponent,
     CreateMovieComponent,
-    UsersComponent
+    UsersComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,

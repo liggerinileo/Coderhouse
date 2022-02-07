@@ -7,6 +7,7 @@ import { CartPageComponent } from "./page/cart-page/cart-page.component";
 import { CreateMovieComponent } from "./page/create-movie/create-movie.component";
 import { AdminGuard } from './guards/admin.guard';
 import { UsersComponent } from './page/users/users.component';
+import { UserComponent } from './page/user/user.component';
 
 const routes: Routes = [
   
@@ -26,6 +27,11 @@ const routes: Routes = [
   {
     path: 'users',
     component: UsersComponent,
+    canActivate: [AdminGuard],
+  },
+  {
+    path: 'user',
+    component: UserComponent,
     canActivate: [AdminGuard],
   },
   {

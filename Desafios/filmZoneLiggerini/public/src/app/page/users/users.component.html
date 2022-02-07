@@ -30,12 +30,16 @@
                             <mat-icon>delete</mat-icon>
                         </a>
                         <a *ngIf="!user?.isAdmin" mat-mini-fab color="primary" matTooltip="Dar permisos de admin" 
-                            (click)="makeOrTakeAdmin(user, user?._id, true)">
+                            class="makeOrTakeAdmin" (click)="makeOrTakeAdmin(user, user?._id, true)">
                             <mat-icon>bubble_chart</mat-icon>
                         </a>
                         <a *ngIf="user?.isAdmin" mat-mini-fab color="warn" matTooltip="Quitar permisos de admin" 
-                            (click)="makeOrTakeAdmin(user, user?._id, false)">
+                            class="makeOrTakeAdmin" (click)="makeOrTakeAdmin(user, user?._id, false)">
                             <mat-icon>bubble_chart</mat-icon>
+                        </a>
+                        <a mat-mini-fab color="basic" matTooltip="Detalles" 
+                            (click)="userDetails(user)">
+                            <mat-icon>add</mat-icon>
                         </a>
                     </td>
                   </tr>
@@ -44,7 +48,7 @@
         </div>
     </div>
     <div style="margin-top: 4%; display: flex; justify-content: center; padding-bottom: 14%;">
-        <a mat-raised-button color="warn" [routerLink]="['/home']" style="width: 150px;">
+        <a mat-raised-button color="warn" [routerLink]="['/home']" class="volver">
             Volver
         </a>  
     </div>

@@ -1,0 +1,62 @@
+<div class="list">
+    <div class="imagen-header">
+        <a [routerLink]="['/home']">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/4/4c/The_Film_Zone_logo.PNG" alt="">
+        </a>
+    </div>
+    <div class="lista mb-4">
+        <div class="titulo-lista">
+            <h1>Usuario: <span style="color: rgb(237 57 57);">{{user?.userName}}</span></h1>
+        </div>
+        <div class="listado">
+            <table class="table">
+                <thead>
+                  <tr class="text-center">
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">¿Es admin?</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="text-center">
+                    <td>{{user?.userName}}</td>
+                    <td>{{user?.email}}</td>
+                    <td *ngIf="user?.isAdmin"><mat-icon>check_circle_outline</mat-icon></td>
+                    <td *ngIf="!user?.isAdmin"><mat-icon>highlight_off</mat-icon></td>
+                  </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="lista-alquileres mt-5">
+        <div class="titulo-lista">
+            <h1>Peliculas en carrito</h1>
+        </div>
+        <div class="listado">
+            <table class="table">
+                <thead>
+                  <tr class="text-center">
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Año</th>
+                    <th scope="col">Precio</th>
+                    <th scope="col">¿Alquilada?</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let movie of moviesList" class="text-center">
+                    <td>{{movie?.name}}</td>
+                    <td>{{movie?.year}}</td>
+                    <td>{{movie?.price}}</td>
+                    <td *ngIf="movie?.rented"><mat-icon>check_circle_outline</mat-icon></td>
+                    <td *ngIf="!movie?.rented"><mat-icon>highlight_off</mat-icon></td>
+                  </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div style="margin-top: 4%; display: flex; justify-content: center; padding-bottom: 14%;">
+        <a mat-raised-button color="warn" [routerLink]="['/users']" class="volver">
+            Volver
+        </a>  
+    </div>
+</div>

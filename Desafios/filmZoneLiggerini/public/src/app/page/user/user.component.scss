@@ -31,8 +31,17 @@
     width: 100%;
     display: flex;
     justify-content: center;
-    margin-top: 75px;
+    margin-top: 25px;
     
+}
+
+.volver:hover {
+    background-color: rgb(179, 58, 58);
+}
+
+.volver {
+    width: 150px; 
+    text-decoration: none;
 }
 
 .listado table {
@@ -58,27 +67,3 @@ tr th {
     font-size: 18px;
     font-weight: 500;
 }
-
-.user-delete {
-    display: flex;
-    justify-content: center;
-    padding-left: 25px;
-    padding-right: 25px;
-    border: none;
-    margin-left: 25px;
-    width: 90px;
-}
-
-.user-delete .delete, .makeOrTakeAdmin {
-    margin-right: 30px;
-}
-
-.volver:hover {
-    background-color: rgb(179, 58, 58);
-}
-
-.volver {
-    width: 150px; 
-    text-decoration: none;
-}
-

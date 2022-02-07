@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { User } from 'src/app/models/User';
 import { MoviesService } from 'src/app/service/movies/movies.service';
@@ -16,7 +17,8 @@ export class UsersComponent implements OnInit {
   user: User | undefined;
   admin: boolean | undefined;
 
-  constructor(private userService: UsersService, private moviesService: MoviesService, private modal: NgbModal) { }
+  constructor(private userService: UsersService, private moviesService: MoviesService, 
+    private router: Router, private modal: NgbModal) { }
 
   ngOnInit(): void {
     this.load();
@@ -43,6 +45,11 @@ export class UsersComponent implements OnInit {
       }
 
     });
+  }
+
+  userDetails(user: User) {
+    this.userService.setUser(user);
+    this.router.navigate(['/user']);
   }
 
   makeOrTakeAdmin(user: User, id: string | undefined, admin: boolean) {
