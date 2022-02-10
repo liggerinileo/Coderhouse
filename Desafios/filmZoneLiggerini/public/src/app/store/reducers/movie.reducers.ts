@@ -1,11 +1,21 @@
-import { ADDEDTOCART } from "../actions/cart.actions";
+import * as mvie from "../actions/movie.actions";
+import { State } from "../states/movie.state";
 
-export const initialState = { addedToCart: false };
+export const initialState: State = { 
+    ids: [],
+    movies: {},
+    movieSelected: null
+};
 
-export const movieReducer = (state = initialState, action: any) => {
+export const movieReducer = (state = initialState, action: mvie.Actions): State => {
     switch (action.type) {
-        case ADDEDTOCART:
-            return {...state, addedToCart: state.addedToCart + action.payload}
+        case mvie.ADDTOCART:
+            //const movie = action.payload;
+            return {
+                ids: state.ids,
+                movies: state.movies,
+                movieSelected: action.payload
+              };
     
         default:
             return state;

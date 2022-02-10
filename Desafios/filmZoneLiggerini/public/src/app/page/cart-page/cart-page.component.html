@@ -36,7 +36,7 @@
                     <div *ngIf="this.user.userName != movie?.client" class="movie-not-rented">
                     </div>
                     <div *ngIf="!movie?.rented; else return" class="movie-delete">
-                        <a mat-fab color="warn" (click)="openModal(eliminar, movie?._id)">
+                        <a mat-fab color="warn" (click)="openModal(eliminar, movie)">
                             <mat-icon>delete</mat-icon>
                         </a>
                     </div>

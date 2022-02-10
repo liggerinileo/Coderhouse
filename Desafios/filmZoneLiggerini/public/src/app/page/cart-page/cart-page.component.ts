@@ -4,8 +4,8 @@ import { Router } from '@angular/router';
 import { UsersService } from 'src/app/service/users/users.service';
 import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { MoviesService } from 'src/app/service/movies/movies.service';
-import { addedtocart } from "../../store/actions/cart.actions";
-import { MovieState } from "../../store/states/movie.state";
+import * as mvie from "../../store/actions/movie.actions";
+import { State } from "../../store/states/movie.state";
 import { MovieStore } from "../../store/stores/movie.store";
 import { Store } from 'redux';
 import { Movie } from 'src/app/models/Movie';
@@ -21,14 +21,14 @@ export class CartPageComponent implements OnInit {
   admin: boolean = false;
   sumaTotal: number = 0;
   id: number = -1;
-  stateAddedToCart: any;
+  state: any;
   user: any;
   movie: any;
   today: any;
 
   constructor(private router: Router, private cartService: CartService, 
     private userService: UsersService, private moviesService: MoviesService, private modal: NgbModal,
-    @Inject(MovieStore) private store: Store<MovieState>) {
+    @Inject(MovieStore) private store: Store<State>) {
       this.readState();
       store.subscribe(() => {
         this.readState();
@@ -41,9 +41,9 @@ export class CartPageComponent implements OnInit {
   }
 
   readState() {
-    const state: MovieState = this.store.getState();
-    this.stateAddedToCart = state.addedToCart;
-    console.log(this.stateAddedToCart);
+    const state: State = this.store.getState();
+    this.state = state;
+    console.log(this.state);
   }
 
   load(alquilar: boolean): void {
@@ -53,7 +53,6 @@ export class CartPageComponent implements OnInit {
     }
     let today = new Date().toDateString();
     this.cartService.getAll().subscribe(movies => {
-      debugger;
       movies.forEach((m: any) => {
         if (m.rented) {
           if (m.returnDate == today) {
@@ -143,10 +142,11 @@ export class CartPageComponent implements OnInit {
   }
 
   delete() {
-    this.cartService.deleteMovie(this.id).subscribe(res => {
+    this.cartService.deleteMovie(this.movie._id).subscribe(res => {
       this.sumaTotal -= this.sumaTotal;
       this.dismiss();
-      this.store.dispatch<any>(addedtocart(false));
+      this.movie.addedToCart = false;
+      //this.store.dispatch<any>(this.movie);
       this.load(false);
 
     }, error => {
@@ -155,8 +155,8 @@ export class CartPageComponent implements OnInit {
     });
   }
 
-  openModal(content: any, id: any) {
-    this.id = id;
+  openModal(content: any, movie: any) {
+    this.movie = movie;
     let options: NgbModalOptions = {
       centered: true,
       backdrop: 'static',

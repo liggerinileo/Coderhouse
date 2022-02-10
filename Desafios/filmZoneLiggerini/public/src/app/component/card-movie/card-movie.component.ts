@@ -7,8 +7,8 @@ import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { UsersService } from 'src/app/service/users/users.service';
 import { Cart } from 'src/app/models/Cart';
 import { Movie } from 'src/app/models/Movie';
-import { addedtocart } from "../../store/actions/cart.actions";
-import { MovieState } from "../../store/states/movie.state";
+import * as mvie from "../../store/actions/movie.actions";
+import { State } from "../../store/states/movie.state";
 import { MovieStore } from "../../store/stores/movie.store";
 import { Store } from 'redux';
 
@@ -24,11 +24,11 @@ export class CardMovieComponent {
   movieToDelete: any;
   admin: boolean = false;
   user: any;
-  stateAddedToCart: any;
+  state: any;
 
   constructor(private cartService: CartService, private moviesService: MoviesService, 
             private router: Router, private modal: NgbModal, private userService: UsersService,
-            @Inject(MovieStore) private store: Store<MovieState>) {
+            @Inject(MovieStore) private store: Store<State>) {
       this.user = this.userService.getUser();
       if (this.user?.isAdmin) {
         this.admin = true;
@@ -40,9 +40,9 @@ export class CardMovieComponent {
   }
 
   readState() {
-    const state: MovieState = this.store.getState();
-    this.stateAddedToCart = state.addedToCart;
-    console.log(this.stateAddedToCart);
+    const state: State = this.store.getState();
+    this.state = state;
+    console.log(this.state);
   }
 
   addToCart(): void {    
@@ -65,7 +65,16 @@ export class CardMovieComponent {
     
     this.cartService.addMovie(movieCart).subscribe(res => {
       console.log(res);
-      this.store.dispatch<any>(addedtocart(true));
+      //this.store.dispatch<any>(new mvie.AddToCart(movieCart));
+      let state = {
+          ids: this.movie?._id,
+          movies: this.movie?._id,
+          movieSelected: this.movie
+      };
+      this.store.dispatch<any>({
+        type: mvie.ADDTOCART,
+        state
+      });
       this.moviesService.editMovie(this.movie, this.movie?._id).subscribe(res => {
         console.log(res);
   
