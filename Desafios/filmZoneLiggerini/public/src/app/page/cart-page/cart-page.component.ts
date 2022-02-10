@@ -53,7 +53,6 @@ export class CartPageComponent implements OnInit {
     }
     let today = new Date().toDateString();
     this.cartService.getAll().subscribe(movies => {
-      debugger;
       movies.forEach((m: any) => {
         if (m.rented) {
           if (m.returnDate == today) {
