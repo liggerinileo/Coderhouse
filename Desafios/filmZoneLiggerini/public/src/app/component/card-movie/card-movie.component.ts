@@ -42,7 +42,9 @@ export class CardMovieComponent {
   readState() {
     const state: State = this.store.getState();
     this.state = state;
+    console.log("STATE");
     console.log(this.state);
+    console.log("-------------------------");
   }
 
   addToCart(): void {    
@@ -62,19 +64,10 @@ export class CardMovieComponent {
       rented: false,
       client: this.user.userName
     };
-    
+
     this.cartService.addMovie(movieCart).subscribe(res => {
       console.log(res);
-      //this.store.dispatch<any>(new mvie.AddToCart(movieCart));
-      let state = {
-          ids: this.movie?._id,
-          movies: this.movie?._id,
-          movieSelected: this.movie
-      };
-      this.store.dispatch<any>({
-        type: mvie.ADDTOCART,
-        state
-      });
+      this.store.dispatch<any>(mvie.addedtocart(movieCart));
       this.moviesService.editMovie(this.movie, this.movie?._id).subscribe(res => {
         console.log(res);
   

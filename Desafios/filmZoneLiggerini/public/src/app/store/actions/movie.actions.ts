@@ -1,12 +1,11 @@
 import { Action } from '@ngrx/store';
 import { Cart } from 'src/app/models/Cart';
-import { State } from "../states/movie.state";
 
 export const ADDTOCART: string = 'ADDTOCART';
-export const addedtocart = ( state: State ) => {
+export const addedtocart = ( movie: Cart ) => {
     return {
         type: ADDTOCART,
-        payload: state
+        payload: movie
     }
 }
 

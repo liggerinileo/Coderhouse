@@ -35,11 +35,14 @@ export class HomeComponent{
     this.moviesService.getAll().subscribe(movies => {
       this.cartService.getAll().subscribe(m => {
         if (m.length > 0) {
+          let cartUser = m.filter((movie: any) => movie.client == this.user.userName);
           m.forEach((movie: any) => {
             if (movie.client != this.user.userName) {
               movies.forEach((e: any) => {
-                if (e.name == movie.name) {
+                let movieUser = cartUser.filter((m: any) => m.name == movie.name);
+                if (e.name == movie.name && movieUser.length == 0) {
                   e.addedToCart = false;
+                  console.log(e);
                 }
               });
             }

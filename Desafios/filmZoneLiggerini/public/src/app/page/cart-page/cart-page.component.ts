@@ -43,7 +43,9 @@ export class CartPageComponent implements OnInit {
   readState() {
     const state: State = this.store.getState();
     this.state = state;
+    console.log("STATE");
     console.log(this.state);
+    console.log("-------------------------");
   }
 
   load(alquilar: boolean): void {
