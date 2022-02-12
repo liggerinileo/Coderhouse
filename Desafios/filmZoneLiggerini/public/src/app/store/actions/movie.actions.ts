@@ -2,10 +2,10 @@ import { Action } from '@ngrx/store';
 import { Cart } from 'src/app/models/Cart';
 
 export const ADDTOCART: string = 'ADDTOCART';
-export const addedtocart = ( movie: Cart ) => {
+export const addedtocart = ( state: {}) => {
     return {
         type: ADDTOCART,
-        payload: movie
+        payload: state
     }
 }
 

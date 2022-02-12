@@ -88,7 +88,11 @@ export class CardMovieBigComponent {
     
     this.cartService.addMovie(movieCart).subscribe(res => {
       console.log(res);
-      this.store.dispatch<any>(mvie.addedtocart(movieCart));
+      let state = {
+        movie: movieCart,
+        state: "Added to cart"
+      }
+      this.store.dispatch<any>(mvie.addedtocart(state));
       this.moviesService.editMovie(this.movie, this.movie?._id).subscribe(res => {
         console.log(res);
   
