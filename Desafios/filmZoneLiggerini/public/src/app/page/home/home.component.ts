@@ -35,15 +35,39 @@ export class HomeComponent{
     this.moviesService.getAll().subscribe(movies => {
       this.cartService.getAll().subscribe(m => {
         if (m.length > 0) {
-          m.forEach((movie: any) => {
-            if (movie.client != this.user.userName) {
-              movies.forEach((e: any) => {
-                if (e.name == movie.name) {
-                  e.addedToCart = false;
+          let cartUser = m.filter((movie: any) => movie.client == this.user.userName);
+          console.log(cartUser);
+          cartUser.forEach((movie: any) => {
+            movies.forEach((e: any) => {
+              let movieUser = cartUser.filter((mo: any) => mo.name == e.name);
+              console.log(movieUser);
+              if (movieUser.length == 0) {
+                e.addedToCart = false;
+                console.log(e);
+    
+              }
+            });
+          });
+        } else {
+          let moviesAdded = movies.filter((m: any) => m.addedToCart);
+          if (moviesAdded.length > 0) {
+            moviesAdded.forEach((e: any) => {
+              e.addedToCart = false;
+              this.moviesService.editMovie(e, e._id).subscribe(res => {
+                console.log(res);
+        
+              }, error => {
+                console.log(error);
+                if(error == "Token invalido" || error == "No hay token") {
+                  alert("Ha expirado el tiempo de sesión");
+        
+                } else {
+                  alert(error?.error?.message);
+        
                 }
               });
-            }
-          });
+            });
+          }
         }
         this.continuarViendo = movies.filter((movie: Movie) => movie.filmZoneCategory.includes("continuar-viendo"));
         this.tendencias = movies.filter((movie: Movie) => movie.filmZoneCategory.includes("tendencias"));

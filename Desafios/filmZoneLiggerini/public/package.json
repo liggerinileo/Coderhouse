@@ -27,6 +27,8 @@
     "bootstrap": "^4.5.0",
     "ng-modal": "^1.0.2",
     "redux": "^4.1.2",
+    "redux-devtools-extension": "^2.13.9",
+    "redux-thunk": "^2.4.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"

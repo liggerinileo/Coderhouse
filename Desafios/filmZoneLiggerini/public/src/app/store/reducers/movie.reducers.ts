@@ -1,13 +1,59 @@
-import { ADDEDTOCART } from "../actions/cart.actions";
+import * as mvie from "../actions/movie.actions";
+import { State } from "../states/movie.state";
 
-export const initialState = { addedToCart: false };
+export const initialState: State = {
+    movieSelected: null
+};
 
-export const movieReducer = (state = initialState, action: any) => {
-    switch (action.type) {
-        case ADDEDTOCART:
-            return {...state, addedToCart: state.addedToCart + action.payload}
-    
+export const movieReducer = (state = initialState, action: mvie.Actions): State => {
+    return {
+        ...state,
+        movieSelected: action.payload
+    };
+    /*switch (action.type) {
+        case mvie.ADDTOCART:
+            return {
+                ...state,
+                movieSelected: action.payload
+            };
+
+        case mvie.REMOVEFROMCART:
+            return {
+                ...state,
+                movieSelected: action.payload
+            };
+
+        case mvie.RENTED:
+            return {
+                ...state,
+                movieSelected: action.payload
+            };
+
+        case mvie.RETURNED:
+            return {
+                ...state,
+                movieSelected: action.payload
+            };
+
+        case mvie.CREATED:
+            return {
+                ...state,
+                movieSelected: action.payload
+            };
+
+        case mvie.RENTED:
+            return {
+                ...state,
+                movieSelected: action.payload
+            };
+
+        case mvie.RETURNED:
+            return {
+                ...state,
+                movieSelected: action.payload
+            };
+
         default:
             return state;
-    }
+    }*/
 }

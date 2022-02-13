@@ -1,12 +1,15 @@
 import { InjectionToken } from "@angular/core";
 import { movieReducer } from "../reducers/movie.reducers";
-import { createStore } from "redux";
+import { createStore, applyMiddleware  } from "redux";
+import ReduxThunk from 'redux-thunk';
 
-export function createCartStore() {
-    return createStore(movieReducer);
+const middlewares = [ReduxThunk];
+
+export function createMovieStore() {
+    return createStore(movieReducer, applyMiddleware(...middlewares));
 }
 
 export const MovieStore = new InjectionToken('cart.store');
 export const movieStoreProviders = [
-    {provide: MovieStore, useFactory: createCartStore}
+    {provide: MovieStore, useFactory: createMovieStore}
 ]

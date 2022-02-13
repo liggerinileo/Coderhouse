@@ -1,6 +1,7 @@
 import {
   Component,
   EventEmitter,
+  Inject,
   Input,
   Output
 } from '@angular/core';
@@ -26,6 +27,10 @@ import {
 import {
   Cart
 } from 'src/app/models/Cart';
+import { MovieStore } from 'src/app/store/stores/movie.store';
+import { Store } from 'redux';
+import { State } from 'src/app/store/states/movie.state';
+import * as mvie from "../../store/actions/movie.actions";
 
 @Component({
   selector: 'app-card-movie-big',
@@ -39,13 +44,27 @@ export class CardMovieBigComponent {
   admin: boolean = false;
   addedToC: boolean = false;
   user: any;
+  state: any;
 
   constructor(private cartService: CartService, private moviesService: MoviesService,
-    private router: Router, private modal: NgbModal, private userService: UsersService) {
+      private router: Router, private modal: NgbModal, private userService: UsersService,
+      @Inject(MovieStore) private store: Store<State>) {
     this.user = this.userService.getUser();
     if (this.user?.isAdmin) {
       this.admin = true;
     }
+    this.readState();
+    store.subscribe(() => {
+      this.readState();
+    })
+  }
+
+  readState() {
+    const state: State = this.store.getState();
+    this.state = state;
+    console.log("STATE");
+    console.log(this.state);
+    console.log("-------------------------");
   }
 
 
@@ -69,6 +88,11 @@ export class CardMovieBigComponent {
     
     this.cartService.addMovie(movieCart).subscribe(res => {
       console.log(res);
+      let state = {
+        movie: movieCart,
+        state: "Added to cart"
+      }
+      this.store.dispatch<any>(mvie.addedtocart(state));
       this.moviesService.editMovie(this.movie, this.movie?._id).subscribe(res => {
         console.log(res);
   

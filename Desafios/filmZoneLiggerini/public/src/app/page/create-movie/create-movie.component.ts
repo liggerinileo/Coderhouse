@@ -1,8 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Store } from 'redux';
 import { Movie } from 'src/app/models/Movie';
 import { MoviesService } from 'src/app/service/movies/movies.service';
+import { State } from 'src/app/store/states/movie.state';
+import { MovieStore } from 'src/app/store/stores/movie.store';
+import * as mvie from "../../store/actions/movie.actions";
 
 @Component({
   selector: 'app-create-movie',
@@ -16,9 +20,23 @@ export class CreateMovieComponent implements OnInit{
   uploadMovieForm: any;
   title: string = "Crear";
   editar = false;
+  state: any
 
-  constructor(private fb: FormBuilder, private router: Router, private moviesService: MoviesService) {
+  constructor(private fb: FormBuilder, private router: Router, private moviesService: MoviesService,
+      @Inject(MovieStore) private store: Store<State>) {
     this.movie = moviesService.getMovie();
+    this.readState();
+    store.subscribe(() => {
+      this.readState();
+    })  
+  }
+
+  readState() {
+    const state: State = this.store.getState();
+    this.state = state;
+    console.log("STATE");
+    console.log(this.state);
+    console.log("-------------------------");
   }
 
   ngOnInit(): void {
@@ -161,6 +179,11 @@ export class CreateMovieComponent implements OnInit{
         this.moviesService.createMovie(movie).subscribe(res => {
           console.log(res);
           this.volver();
+          let state = {
+            movie: movie,
+            state: "Movie created"
+          }
+          this.store.dispatch<any>(mvie.created(state));
   
         }, error => {
           if(error == "Token invalido" || error == "No hay token") {
@@ -191,6 +214,11 @@ export class CreateMovieComponent implements OnInit{
       this.moviesService.editMovie(movie, this.movie?._id).subscribe(res => {
         console.log(res);
         this.volver();
+        let state = {
+          movie: movie,
+          state: "Movie edited"
+        }
+        this.store.dispatch<any>(mvie.edited(state));
 
       }, error => {
         console.log(error);
