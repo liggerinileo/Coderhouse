@@ -60,7 +60,7 @@ export class CartPageComponent implements OnInit {
           if (m.returnDate == today) {
             m.returnDate = " ";
             m.rented = false;
-            this.editMovie(m, m?._id);
+            this.editMovie(m, m?._id, null);
           }
         }
       });
@@ -102,7 +102,7 @@ export class CartPageComponent implements OnInit {
       rented: false,
       returnDate: " "
     }
-    this.editMovie(m, this.movie?._id);
+    this.editMovie(m, this.movie?._id, false);
   }
 
   rent() {
@@ -122,15 +122,30 @@ export class CartPageComponent implements OnInit {
       rented: true,
       returnDate: dateToReturn.toDateString()
     }
-    this.editMovie(m, this.movie?._id);
+    this.editMovie(m, this.movie?._id, true);
   }
 
-  editMovie(movie: Movie, movieId: string) {
+  editMovie(movie: Movie, movieId: string, rented: Boolean | null) {
     this.cartService.editMovie(movie, movieId).subscribe(res => {
       console.log(res);
       this.load(true);
       this.dismiss();
 
+      if (rented) {
+        let state = {
+          movie: movie,
+          state: "Movie rented"
+        }
+        this.store.dispatch<any>(mvie.rented(state));
+
+      } else if (!rented) {
+        let state = {
+          movie: movie,
+          state: "Movie returned"
+        }
+        this.store.dispatch<any>(mvie.returned(state));
+
+      }
     }, error => {
       console.log(error);
       if(error == "Token invalido" || error == "No hay token") {

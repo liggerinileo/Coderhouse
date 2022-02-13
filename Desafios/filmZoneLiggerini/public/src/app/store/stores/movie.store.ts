@@ -5,11 +5,11 @@ import ReduxThunk from 'redux-thunk';
 
 const middlewares = [ReduxThunk];
 
-export function createCartStore() {
+export function createMovieStore() {
     return createStore(movieReducer, applyMiddleware(...middlewares));
 }
 
 export const MovieStore = new InjectionToken('cart.store');
 export const movieStoreProviders = [
-    {provide: MovieStore, useFactory: createCartStore}
+    {provide: MovieStore, useFactory: createMovieStore}
 ]

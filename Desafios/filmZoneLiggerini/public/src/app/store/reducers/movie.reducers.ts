@@ -12,7 +12,20 @@ export const movieReducer = (state = initialState, action: mvie.Actions): State 
                 ...state,
                 movieSelected: action.payload
             };
+
         case mvie.REMOVEFROMCART:
+            return {
+                ...state,
+                movieSelected: action.payload
+            };
+
+        case mvie.RENTED:
+            return {
+                ...state,
+                movieSelected: action.payload
+            };
+
+        case mvie.RETURNED:
             return {
                 ...state,
                 movieSelected: action.payload

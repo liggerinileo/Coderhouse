@@ -29,5 +29,34 @@ export class RemoveFromCart implements Action {
     constructor(public payload: Cart) { }
 }
 
+export const RENTED: string = 'RENTED';
+export const rented = ( state: {}) => {
+    return {
+        type: RENTED,
+        payload: state
+    }
+}
+
+export class Rented implements Action {
+    readonly type = RENTED;
+  
+    constructor(public payload: Cart) { }
+}
+
+export const RETURNED: string = 'RETURNED';
+export const returned = ( state: {}) => {
+    return {
+        type: RENTED,
+        payload: state
+    }
+}
+
+export class Returned implements Action {
+    readonly type = RETURNED;
+  
+    constructor(public payload: Cart) { }
+}
+
+
 export type Actions
-  = AddToCart | RemoveFromCart;
+  = AddToCart | RemoveFromCart | Rented | Returned;
