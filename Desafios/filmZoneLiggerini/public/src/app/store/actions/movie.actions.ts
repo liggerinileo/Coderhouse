@@ -15,5 +15,19 @@ export class AddToCart implements Action {
     constructor(public payload: Cart) { }
 }
 
+export const REMOVEFROMCART: string = 'REMOVEFROMCART';
+export const removedfromcart = ( state: {}) => {
+    return {
+        type: REMOVEFROMCART,
+        payload: state
+    }
+}
+
+export class RemoveFromCart implements Action {
+    readonly type = REMOVEFROMCART;
+  
+    constructor(public payload: Cart) { }
+}
+
 export type Actions
-  = AddToCart;
+  = AddToCart | RemoveFromCart;

@@ -148,8 +148,12 @@ export class CartPageComponent implements OnInit {
       this.sumaTotal -= this.sumaTotal;
       this.dismiss();
       this.movie.addedToCart = false;
-      //this.store.dispatch<any>(this.movie);
       this.load(false);
+      let state = {
+        movie: this.movie,
+        state: "Removed from cart"
+      }
+      this.store.dispatch<any>(mvie.removedfromcart(state));
 
     }, error => {
       console.log(error);
