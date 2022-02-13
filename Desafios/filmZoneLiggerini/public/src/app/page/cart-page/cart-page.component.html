@@ -20,8 +20,8 @@
                     </div>
                     <div *ngIf="this.admin" class="movie-client">
                         <p>
-                            <span style="font-weight: 500; font-size: 15px;">Usuario: </span>
-                            &nbsp; {{movie?.client}}
+                            <span style="font-weight: 500; font-size: 19px; margin-right: 10px;">Usuario: </span>
+                            {{movie?.client}}
                         </p>
                     </div>
                     <div *ngIf="!movie?.rented && this.user.userName == movie?.client" class="movie-to-rent">
