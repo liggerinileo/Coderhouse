@@ -1,6 +1,8 @@
 import { Action } from '@ngrx/store';
 import { Cart } from 'src/app/models/Cart';
+import { Movie } from 'src/app/models/Movie';
 
+/********** ADDTOCART ************/
 export const ADDTOCART: string = 'ADDTOCART';
 export const addedtocart = ( state: {}) => {
     return {
@@ -15,6 +17,7 @@ export class AddToCart implements Action {
     constructor(public payload: Cart) { }
 }
 
+/********** REMOVEFROMCART ************/
 export const REMOVEFROMCART: string = 'REMOVEFROMCART';
 export const removedfromcart = ( state: {}) => {
     return {
@@ -29,6 +32,7 @@ export class RemoveFromCart implements Action {
     constructor(public payload: Cart) { }
 }
 
+/********** RENTED ************/
 export const RENTED: string = 'RENTED';
 export const rented = ( state: {}) => {
     return {
@@ -43,10 +47,11 @@ export class Rented implements Action {
     constructor(public payload: Cart) { }
 }
 
+/********** RETURNED ************/
 export const RETURNED: string = 'RETURNED';
 export const returned = ( state: {}) => {
     return {
-        type: RENTED,
+        type: RETURNED,
         payload: state
     }
 }
@@ -57,6 +62,51 @@ export class Returned implements Action {
     constructor(public payload: Cart) { }
 }
 
+/********** CREATED ************/
+export const CREATED: string = 'CREATED';
+export const created = ( state: {}) => {
+    return {
+        type: CREATED,
+        payload: state
+    }
+}
+
+export class Created implements Action {
+    readonly type = CREATED;
+  
+    constructor(public payload: Movie) { }
+}
+
+/********** DELETED ************/
+export const DELETED: string = 'DELETED';
+export const deleted = ( state: {}) => {
+    return {
+        type: DELETED,
+        payload: state
+    }
+}
+
+export class Deleted implements Action {
+    readonly type = DELETED;
+  
+    constructor(public payload: Movie) { }
+}
+
+/********** EDITED ************/
+export const EDITED: string = 'EDITED';
+export const edited = ( state: {}) => {
+    return {
+        type: EDITED,
+        payload: state
+    }
+}
+
+export class Edited implements Action {
+    readonly type = EDITED;
+  
+    constructor(public payload: Movie) { }
+}
+
 
 export type Actions
-  = AddToCart | RemoveFromCart | Rented | Returned;
+  = AddToCart | RemoveFromCart | Rented | Returned | Created | Deleted | Edited;

@@ -6,7 +6,11 @@ export const initialState: State = {
 };
 
 export const movieReducer = (state = initialState, action: mvie.Actions): State => {
-    switch (action.type) {
+    return {
+        ...state,
+        movieSelected: action.payload
+    };
+    /*switch (action.type) {
         case mvie.ADDTOCART:
             return {
                 ...state,
@@ -30,8 +34,26 @@ export const movieReducer = (state = initialState, action: mvie.Actions): State 
                 ...state,
                 movieSelected: action.payload
             };
-    
+
+        case mvie.CREATED:
+            return {
+                ...state,
+                movieSelected: action.payload
+            };
+
+        case mvie.RENTED:
+            return {
+                ...state,
+                movieSelected: action.payload
+            };
+
+        case mvie.RETURNED:
+            return {
+                ...state,
+                movieSelected: action.payload
+            };
+
         default:
             return state;
-    }
+    }*/
 }

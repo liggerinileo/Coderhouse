@@ -111,7 +111,12 @@ export class CardMovieComponent {
     this.moviesService.delete(this.movie?._id).subscribe(res => {
       this.modal.dismissAll(true);
       this.load.emit(true);
-
+      let state = {
+        movie: this.movie,
+        state: "Movie deleted"
+      }
+      this.store.dispatch<any>(mvie.deleted(state));
+    
     }, error => {
       this.modal.dismissAll(false);
       alert(error?.error?.message);
